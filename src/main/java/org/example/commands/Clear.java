@@ -26,10 +26,10 @@ public class Clear extends Command implements Executable{
     @Override
     public void execute(String[] splitedConsoleRead) {
 
-       if (this.collectionManager.getCOLLECTION().isEmpty()){
+       if (this.collectionManager.getCollection().isEmpty()){
            System.out.println("Коллекция пуста!");
        }else {
-           this.collectionManager.getCOLLECTION().clear();
+           this.collectionManager.getCollection().clear();
            System.out.println("Коллекция успешно очищена!");
        }
 

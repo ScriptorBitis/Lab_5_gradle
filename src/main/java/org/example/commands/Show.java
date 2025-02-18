@@ -23,12 +23,12 @@ public class Show extends Command implements Executable{
     @Override
     public void execute(String[] splitedConsoleRead) {
 
-        if (this.collectionManager.getCOLLECTION().isEmpty()){
+        if (this.collectionManager.getCollection().isEmpty()){
             System.out.println("Коллекция пуста!");
             return;
         }
 
-        for (Ticket ticket :this.collectionManager.getCOLLECTION().values()){
+        for (Ticket ticket :this.collectionManager.getCollection().values()){
             System.out.println(ticket.toString());
         }
 

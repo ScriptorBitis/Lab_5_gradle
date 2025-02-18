@@ -1,15 +1,22 @@
 package org.example;
 
+import org.example.managers.CollectionManager;
 import org.example.utility.Engine;
 
+import java.io.IOException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+
+import static org.example.managers.DumpManager.fillUpCollection;
+import static org.example.managers.DumpManager.writeCollection;
 
 public class Main {
     public static void main(String[] args) {
         //TODO build через контроллер
 
         //TODO побороться с cntr+d
+
+
 
 
         Engine.runProgramm();

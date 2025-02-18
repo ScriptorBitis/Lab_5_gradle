@@ -32,15 +32,15 @@ public class RemoveLower extends Command implements Executable {
         //можно использовать сортировку, описанную, в менеджере коллекций,
         //и искать с самых высоких цен.,и прервать поиск, когда попадутся билеты <=. Надеюсь, Ярослав Владимирович не заставит меня шевелить ручками
 
-        for (String key : getCollectionManager().getCOLLECTION().keySet()) {
-            Ticket ticketFromCollection = getCollectionManager().getCOLLECTION().get(key);
+        for (String key : getCollectionManager().getCollection().keySet()) {
+            Ticket ticketFromCollection = getCollectionManager().getCollection().get(key);
             if (ticketFromCollection.getPrice()<ticket.getPrice()){
                 keyList.add(key);
             }
         }
 
         for(String key: keyList){
-            getCollectionManager().getCOLLECTION().remove(key);
+            getCollectionManager().getCollection().remove(key);
             System.out.println("Удален билет по ключу "+key);
         }
     }

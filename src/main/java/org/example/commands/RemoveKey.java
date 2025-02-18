@@ -29,8 +29,8 @@ public class RemoveKey extends Command implements Executable {
         }
 
 
-        if (this.collectionManager.getCOLLECTION().containsKey(splitedConsoleRead[1])){
-            this.collectionManager.getCOLLECTION().remove(splitedConsoleRead[1]);
+        if (this.collectionManager.getCollection().containsKey(splitedConsoleRead[1])){
+            this.collectionManager.getCollection().remove(splitedConsoleRead[1]);
             System.out.println("Элемент удален!");
 
         }else {

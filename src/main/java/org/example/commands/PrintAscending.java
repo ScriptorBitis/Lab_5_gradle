@@ -24,7 +24,7 @@ public class PrintAscending  extends Command implements Executable{
 
     @Override
     public void execute(String[] splitedConsoleRead) {
-        Map<String,Ticket> COLLECTION = this.collectionManager.getCOLLECTION();
+        Map<String,Ticket> COLLECTION = this.collectionManager.getCollection();
         List<Ticket> ticketByPrice = new ArrayList<>(COLLECTION.values());
         Collections.sort(ticketByPrice, Comparator.comparing(Ticket::getPrice));
 

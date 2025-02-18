@@ -25,7 +25,7 @@ public class MaxByCoordinates extends Command implements Executable {
     public void execute(String[] splitedConsoleRead) {
         Ticket ticket=null;
         double coordinatesSum=Double.MIN_VALUE;
-        for (Ticket ticket1:this.collectionManager.getCOLLECTION().values()){
+        for (Ticket ticket1:this.collectionManager.getCollection().values()){
             if (Math.pow(ticket1.getCoordinates().getX(),2)+Math.pow(ticket1.getCoordinates().getY(),2)>coordinatesSum){
                 coordinatesSum=Math.pow(ticket1.getCoordinates().getX(),2)+Math.pow(ticket1.getCoordinates().getY(),2);
                 ticket=ticket1;

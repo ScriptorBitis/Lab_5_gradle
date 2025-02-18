@@ -44,11 +44,11 @@ public class RemoveAnyByType extends Command implements Executable {
                 return;
 
         }
-        for (String key:getCollectionManager().getCOLLECTION().keySet()){
-            Ticket ticket=getCollectionManager().getCOLLECTION().get(key);
+        for (String key:getCollectionManager().getCollection().keySet()){
+            Ticket ticket=getCollectionManager().getCollection().get(key);
             if (ticket.getType().equals(ticketType)){
-                System.out.println("Удаление объекта "+getCollectionManager().getCOLLECTION().get(key).toString());
-                getCollectionManager().getCOLLECTION().remove(key);
+                System.out.println("Удаление объекта "+getCollectionManager().getCollection().get(key).toString());
+                getCollectionManager().getCollection().remove(key);
                 return;
 
             }
@@ -58,7 +58,7 @@ public class RemoveAnyByType extends Command implements Executable {
 
     @Override
     public String toString() {
-        return "remove_by_any";
+        return "remove_any_by_type";
     }
 
     @Override

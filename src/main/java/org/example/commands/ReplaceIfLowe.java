@@ -35,22 +35,22 @@ public class ReplaceIfLowe extends Command implements Executable {
         boolean pass=true;
         try {
             do {
-                System.out.println("Доступные ключи для доступа к билетам : " + this.collectionManager.getCOLLECTION().keySet());
+                System.out.println("Доступные ключи для доступа к билетам : " + this.collectionManager.getCollection().keySet());
                 System.out.println("Введите ключ");
                 String key = consoleRead.nextLine();
                 if (key.equals("exit")){
                     System.out.println("Возвращение на домашнюю страницу");
                     throw new ExitWhileExecuting("Выход во время обновления по id");
                 }
-                if (this.collectionManager.getCOLLECTION().containsKey(key)) {
-                    System.out.println(this.collectionManager.getCOLLECTION().get(key).toString());
+                if (this.collectionManager.getCollection().containsKey(key)) {
+                    System.out.println(this.collectionManager.getCollection().get(key).toString());
                     System.out.println("Вы хотели сравнить с этим билетом?\n1 : да\n2 : нет\n3 : прервать замену билета");
                     String userDecision = consoleRead.nextLine().trim();
                     switch (userDecision){
                         case ("1"):
                             pass=false;
-                            if (this.collectionManager.getCOLLECTION().get(key).getPrice()>ticket.getPrice()){
-                                this.collectionManager.getCOLLECTION().replace(key,ticket);
+                            if (this.collectionManager.getCollection().get(key).getPrice()>ticket.getPrice()){
+                                this.collectionManager.getCollection().replace(key,ticket);
                                 System.out.println("Билет успешно обновлен!");
                             }else {
                                 System.out.println("Билет не обновлен: новая цена больше старой");

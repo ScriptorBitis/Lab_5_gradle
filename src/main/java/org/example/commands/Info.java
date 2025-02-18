@@ -23,10 +23,10 @@ public class Info extends Command implements Executable{
     @Override
     public void execute(String[] splitedConsoleRead) {
         System.out.println("Информация о коллекции:\n"+
-                "Количество элементов : "+ this.collectionManager.getCOLLECTION().size()+"\n"+
-                "Тип : " + this.collectionManager.getCOLLECTION().getClass().getSimpleName()+"\n"+
+                "Количество элементов : "+ this.collectionManager.getCollection().size()+"\n"+
+                "Тип : " + this.collectionManager.getCollection().getClass().getSimpleName()+"\n"+
                 "Время инициализации : "+ this.collectionManager.getInitializationDate()+"\n"+
-                "Набор доступных ключей : "+ this.collectionManager.getCOLLECTION().keySet()+"\n"
+                "Набор доступных ключей : "+ this.collectionManager.getCollection().keySet()+"\n"
 
 
 

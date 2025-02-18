@@ -32,7 +32,7 @@ public class UpdateId extends Command implements Executable{
         }
 
         int id;
-        Map<String,Ticket> COLLECTION = this.collectionManager.getCOLLECTION();
+        Map<String,Ticket> COLLECTION = this.collectionManager.getCollection();
         try { id=Integer.valueOf(splitedConsoleRead[1]);
             for (Ticket ticket: COLLECTION.values()){
                 if (ticket.getId()==id){
