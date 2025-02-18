@@ -1,8 +1,9 @@
-package commands;
+package org.example.commands;
 
-import models.creators.TicketCreator;
-import models.Ticket;
-import managers.CollectionManager;
+import org.example.managers.CollectionManager;
+import org.example.models.Ticket;
+import org.example.models.creators.*;
+import org.example.utility.Validatable;
 
 public class Insert extends Command implements Executable {
 

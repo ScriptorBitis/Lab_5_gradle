@@ -1,6 +1,7 @@
-package commands;
+package org.example.commands;
 
-import managers.CollectionManager;
+
+import org.example.managers.CollectionManager;
 
 public class Info extends Command implements Executable{
 

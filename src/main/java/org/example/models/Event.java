@@ -1,6 +1,6 @@
-package models;
+package org.example.models;
 
-import utility.Validatable;
+import org.example.utility.Validatable;
 
 public class Event implements Validatable {
     private int id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
@@ -82,4 +82,6 @@ public class Event implements Validatable {
                 ", description=" + description + //Убрал ' ', чтобы не путаться с null
                 '}';
     }
+
+
 }

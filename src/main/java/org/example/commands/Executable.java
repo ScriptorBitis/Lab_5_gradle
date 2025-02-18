@@ -1,4 +1,4 @@
-package commands;
+package org.example.commands;
 
 public interface Executable {
     default void execute(String[] splitedConsoleRead){

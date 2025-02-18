@@ -1,11 +1,12 @@
-package utility;
+package org.example.utility;
 
-import commands.*;
-import managers.CollectionManager;
-import managers.CommandManager;
-import models.Coordinates;
-import models.Ticket;
-import models.TicketType;
+import com.google.gson.*;
+import org.example.commands.*;
+import org.example.managers.CollectionManager;
+import org.example.managers.CollectionManager.*;
+import org.example.managers.CommandManager;
+import org.example.models.*;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -50,6 +51,11 @@ public class Engine {
         CommandManager.setUpCommand(new RemoveAnyByType(2, collectionManager));
         CommandManager.setUpCommand(new RemoveGreater(collectionManager));
         CommandManager.setUpCommand(new RemoveLower(collectionManager));
+
+        Gson gson=new Gson();
+        String json = gson.toJson(ticket);
+        System.out.println(json);
+        System.out.println(ticket.toString());
 
 
 

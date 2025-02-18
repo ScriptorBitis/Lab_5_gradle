@@ -1,11 +1,11 @@
-package models.creators;
+package org.example.models.creators;
 
 
-import models.Ticket;
-import models.TicketType;
-import exeptions.ExitWhileExecuting;
-import exeptions.WrongInput;
-import utility.Engine;
+import org.example.models.Ticket;
+import org.example.models.TicketType;
+import org.example.exeptions.ExitWhileExecuting;
+import org.example.exeptions.WrongInput;
+import org.example.utility.Engine;
 
 import java.util.Scanner;
 

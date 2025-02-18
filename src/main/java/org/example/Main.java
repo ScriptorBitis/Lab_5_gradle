@@ -1,4 +1,6 @@
-import utility.Engine;
+package org.example;
+
+import org.example.utility.Engine;
 
 import java.util.NoSuchElementException;
 import java.util.Scanner;

@@ -1,6 +1,6 @@
-package models;
+package org.example.models;
 
-import utility.Validatable;
+import org.example.utility.Validatable;
 
 import java.time.LocalDateTime;
 import java.util.Objects;

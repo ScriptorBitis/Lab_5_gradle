@@ -1,6 +1,9 @@
-package commands;
+package org.example.commands;
 
-import managers.CollectionManager;
+import org.example.managers.CollectionManager;
+import org.example.managers.CollectionManager.*;
+
+
 
 
 public class Clear extends Command implements Executable{

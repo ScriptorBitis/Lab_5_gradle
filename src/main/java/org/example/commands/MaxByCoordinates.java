@@ -1,7 +1,8 @@
-package commands;
+package org.example.commands;
 
-import models.Ticket;
-import managers.CollectionManager;
+
+import org.example.managers.CollectionManager;
+import org.example.models.*;
 
 public class MaxByCoordinates extends Command implements Executable {
 

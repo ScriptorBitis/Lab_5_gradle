@@ -1,6 +1,6 @@
-package commands;
+package org.example.commands;
 
-import managers.CollectionManager;
+import org.example.managers.CollectionManager;
 
 public class RemoveKey extends Command implements Executable {
 

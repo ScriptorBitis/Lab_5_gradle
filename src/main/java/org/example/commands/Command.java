@@ -1,6 +1,7 @@
-package commands;
+package org.example.commands;
 
-import managers.CollectionManager;
+
+import org.example.managers.CollectionManager;
 
 public abstract class Command {
     int wordsCount;

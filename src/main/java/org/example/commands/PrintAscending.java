@@ -1,7 +1,7 @@
-package commands;
+package org.example.commands;
 
-import models.Ticket;
-import managers.CollectionManager;
+import org.example.models.Ticket;
+import org.example.managers.CollectionManager;
 
 import java.util.*;
 

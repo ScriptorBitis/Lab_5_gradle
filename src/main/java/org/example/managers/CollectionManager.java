@@ -1,6 +1,8 @@
-package managers;
+package org.example.managers;
 
-import models.Ticket;
+
+
+import org.example.models.Ticket;
 
 import java.time.LocalDateTime;
 import java.util.*;

@@ -1,7 +1,8 @@
-package commands;
+package org.example.commands;
 
-import managers.CollectionManager;
-import managers.CommandManager;
+
+import org.example.managers.CollectionManager;
+import org.example.managers.CommandManager;
 
 public class Help extends Command implements Executable{
 

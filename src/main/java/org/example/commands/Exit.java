@@ -1,6 +1,8 @@
-package commands;
-import managers.CollectionManager;
-import utility.Engine;
+package org.example.commands;
+
+
+import org.example.managers.CollectionManager;
+import static org.example.utility.Engine.finishProgramm;
 
 public class Exit extends Command implements Executable{
 
@@ -21,7 +23,7 @@ public class Exit extends Command implements Executable{
 
     @Override
     public void execute(String[] splitedRequest) {
-        Engine.finishProgramm();
+        finishProgramm();
     }
 
     @Override

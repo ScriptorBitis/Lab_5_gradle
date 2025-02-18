@@ -1,9 +1,9 @@
-package models.creators;
+package org.example.models.creators;
 
-import models.Coordinates;
-import exeptions.ExitWhileExecuting;
-import exeptions.WrongInput;
-import utility.Engine;
+import org.example.models.Coordinates;
+import org.example.exeptions.ExitWhileExecuting;
+import org.example.exeptions.WrongInput;
+import org.example.utility.Engine;
 
 import java.util.Scanner;
 

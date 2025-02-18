@@ -1,8 +1,8 @@
-package commands;
+package org.example.commands;
 
-import models.Ticket;
-import models.creators.TicketCreator;
-import managers.CollectionManager;
+import org.example.models.Ticket;
+import org.example.models.creators.TicketCreator;
+import org.example.managers.CollectionManager;
 
 import java.util.Map;
 

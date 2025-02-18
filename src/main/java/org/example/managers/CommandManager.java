@@ -1,6 +1,6 @@
-package managers;
+package org.example.managers;
 
-import commands.*;
+import org.example.commands.*;
 
 
 import java.util.HashMap;

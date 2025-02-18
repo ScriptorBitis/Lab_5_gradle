@@ -1,9 +1,9 @@
-package commands;
+package org.example.commands;
 
-import managers.CollectionManager;
-import models.Ticket;
-import models.TicketType;
-import utility.Engine;
+import org.example.managers.CollectionManager;
+import org.example.models.Ticket;
+import org.example.models.TicketType;
+import org.example.utility.Engine;
 
 public class RemoveAnyByType extends Command implements Executable {
     public RemoveAnyByType(int wordsCount, CollectionManager collectionManager) {

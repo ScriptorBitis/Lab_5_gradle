@@ -1,9 +1,9 @@
-package commands;
+package org.example.commands;
 
-import exeptions.ExitWhileExecuting;
-import models.Ticket;
-import models.creators.TicketCreator;
-import managers.CollectionManager;
+import org.example.exeptions.ExitWhileExecuting;
+import org.example.models.Ticket;
+import org.example.models.creators.TicketCreator;
+import org.example.managers.CollectionManager;
 
 import java.util.Scanner;
 

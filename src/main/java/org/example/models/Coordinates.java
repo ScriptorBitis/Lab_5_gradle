@@ -1,8 +1,8 @@
-package models;
+package org.example.models;
 
 import java.lang.Double;
+import org.example.utility.Validatable;
 
-import utility.Validatable;
 
 public class Coordinates implements Validatable {
     private double x;
