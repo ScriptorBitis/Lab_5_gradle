@@ -28,14 +28,14 @@ public class CoordinatesCreator extends Creator {
 
     private static Double askY() {
         Double y = 0.0;
-        boolean pass = true;
-        while (pass){
+        boolean correctField = true;
+        while (correctField){
             try {
                 y = console.getUserInputDouble("Введите координату y. Учтите, что значение Y не может быть больше 484\n->");
                 if (y > 484) {
                     throw new WrongFieldValueException("y превышает максимальное значение");
                 }
-                pass = false;
+                correctField = false;
             } catch ( WrongFieldValueException exception) {
                 System.out.println(exception.getMessage());
             }

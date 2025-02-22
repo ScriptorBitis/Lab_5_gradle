@@ -28,8 +28,9 @@ public class Show extends Command implements Executable{
             return;
         }
 
-        for (Ticket ticket :this.collectionManager.getCollection().values()){
-            System.out.println(ticket.toString());
+        for (String key :this.collectionManager.getCollection().keySet()){
+            System.out.println("Ключ : " + key + ". Элемент : "+this.collectionManager.getCollection().get(key) );
+
         }
 
 

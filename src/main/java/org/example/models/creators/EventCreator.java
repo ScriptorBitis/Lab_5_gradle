@@ -16,15 +16,15 @@ public class EventCreator extends Creator {
         Event.Builder builder = new Event.Builder();
         System.out.println("Инициализировано создание ивента");
 
-        boolean pass = true;
-        while (pass) {
+        boolean correctField = true;
+        while (correctField) {
             switch (console.getUserInputString("Вы хотите создать описание мероприятия?\n1 : да\n2 : нет\n->")) {
                 case ("1"):
                     builder.name(askName());
                     builder.ticketsCount(askTicketCount());
                     builder.description(askDescription());
                     event = builder.build();
-                    pass = false;
+                    correctField = false;
                     break;
                 case ("2"):
                     return null;
@@ -44,15 +44,15 @@ public class EventCreator extends Creator {
 
     private static int askTicketCount() {
         int ticketCount = 0;
-        boolean pass = true;
-        while (pass) {
+        boolean correctField = true;
+        while (correctField) {
             try {
                 String userRequest = console.getUserInputString("Введите количество билетов->");
                 ticketCount = Integer.valueOf(userRequest);
                 if (ticketCount <= 0) {
                     throw new WrongFieldValueException("Количество билетов отрицательное");
                 }
-                pass = false;
+                correctField = false;
             } catch ( WrongFieldValueException exception) {
                 System.out.println(exception.getMessage());
             }

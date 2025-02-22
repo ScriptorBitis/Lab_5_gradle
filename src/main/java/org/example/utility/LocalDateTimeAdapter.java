@@ -11,12 +11,12 @@ public class LocalDateTimeAdapter implements JsonSerializer<LocalDateTime>, Json
 
     @Override
     public JsonElement serialize(LocalDateTime src, Type typeOfSrc, JsonSerializationContext context) {
-        return new JsonPrimitive(formatter.format(src)); // Сериализация в строку
+        return new JsonPrimitive(formatter.format(src));
     }
 
     @Override
     public LocalDateTime deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
             throws JsonParseException {
-        return LocalDateTime.parse(json.getAsString(), formatter); // Десериализация из строки
+        return LocalDateTime.parse(json.getAsString(), formatter);
     }
 }

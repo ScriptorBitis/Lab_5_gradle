@@ -39,8 +39,8 @@ public class TicketCreator extends Creator {
 
     private static Integer askPrice() {
         Integer price = 0;
-        boolean pass = true;
-        while (pass) {
+        boolean correctField = true;
+        while (correctField) {
             try {
                 price = console.getUserInputIntMayBeNull("Введите значение для параметра 'price'.Ввод пустой строки будет засчитан за отсутствие параметра.\nВас предупредили\n->");
                 if (price==null){
@@ -49,7 +49,7 @@ public class TicketCreator extends Creator {
                 if (price <= 0) {
                     throw new WrongFieldValueException("Значение цены не натуральное, а отрицательное");
                 }
-                pass = false;
+                correctField = false;
             } catch (WrongFieldValueException exception) {
                 System.out.println(exception.getMessage());
             }
@@ -59,14 +59,14 @@ public class TicketCreator extends Creator {
 
     private static float askDiscount() {
         float discount = 0;
-        boolean pass = true;
-        while (pass) {
+        boolean correctField = true;
+        while (correctField) {
             try {
                 discount=console.getUserInputFloat("Введите значение для параметра 'скидка' > 0 и <= 100\nПример ввода: 15.5\n->");
                 if (discount <= 0 || discount > 100) {
                     throw new WrongFieldValueException("Введено неправильное значения параметра 'скидка");
                 }
-                pass = false;
+                correctField = false;
             } catch ( WrongFieldValueException exception) {
                 System.out.println(exception.getMessage());
             }

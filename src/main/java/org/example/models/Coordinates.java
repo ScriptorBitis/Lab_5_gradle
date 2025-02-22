@@ -43,7 +43,6 @@ public class Coordinates implements Validatable {
 
     }
 
-    //Проверка на правильность поля y
     @Override
     public boolean validate() {
         if (y == null) {

@@ -22,7 +22,7 @@ public class DumpManager {
 
         try (FileReader fileReader = new FileReader("Lab_data.json")) {
             HashMap<String, Ticket> tickets = gson.fromJson(fileReader, type);
-            System.out.println("Файл прочитан успешно! Приятного изнасилования моей лабы =) ");
+            System.out.println("Файл прочитан успешно!");
             return tickets;
         }
     }
@@ -36,4 +36,5 @@ public class DumpManager {
             fileWriter.write(json);
         }
     }
+
 }

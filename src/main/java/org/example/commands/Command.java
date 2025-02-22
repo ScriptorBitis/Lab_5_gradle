@@ -5,7 +5,7 @@ import org.example.managers.CollectionManager;
 
 public abstract class Command {
     int wordsCount;
-    CollectionManager collectionManager;
+    protected CollectionManager collectionManager;
 
     public Command(int wordsCount, CollectionManager collectionManager) {
         this.wordsCount = wordsCount;
