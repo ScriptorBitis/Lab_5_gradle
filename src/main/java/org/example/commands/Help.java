@@ -23,7 +23,6 @@ public class Help extends Command implements Executable{
 
     @Override
     public void execute(String[] splitedRequest) {
-        //System.out.println(helpMessage);
         for (Executable executable: CommandManager.getCommands().values()){
             executable.describe();
         }

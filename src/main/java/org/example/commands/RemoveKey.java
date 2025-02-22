@@ -1,5 +1,6 @@
 package org.example.commands;
 
+import org.example.exeptions.NoKeyException;
 import org.example.managers.CollectionManager;
 
 public class RemoveKey extends Command implements Executable {
@@ -24,8 +25,7 @@ public class RemoveKey extends Command implements Executable {
 
 
         if (splitedConsoleRead.length!=this.getWordsCount()){
-            System.out.println("Команда remove_key состоит из команды и ключа\nВозвращение на домашнюю страницу.");
-            return;
+            throw new NoKeyException("Команда remove_key состоит из команды и ключа\nВозвращение на домашнюю страницу.");
         }
 
 

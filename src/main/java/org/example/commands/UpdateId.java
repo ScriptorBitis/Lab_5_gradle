@@ -1,5 +1,6 @@
 package org.example.commands;
 
+import org.example.exeptions.WrongIdInputException;
 import org.example.models.Ticket;
 import org.example.models.creators.TicketCreator;
 import org.example.managers.CollectionManager;
@@ -27,8 +28,7 @@ public class UpdateId extends Command implements Executable {
     public void execute(String[] splitedConsoleRead) {
 
         if (splitedConsoleRead.length != this.getWordsCount()) {
-            System.out.println("Команда update состоит из команды и ключа .\nВозвращение на домашнюю страницу.");
-            return;
+            throw new WrongIdInputException("Команда update состоит из команды и ключа .");
         }
 
         int id=0;

@@ -1,5 +1,6 @@
 package org.example.commands;
 
+import org.example.exeptions.NoSuchTypeException;
 import org.example.managers.CollectionManager;
 import org.example.models.Ticket;
 import org.example.models.TicketType;
@@ -37,8 +38,8 @@ public class RemoveAnyByType extends Command implements Executable {
 
         String type = splitedConsoleRead[1];
         if (type.equals("VIP") || type.equals("BUDGETARY") || type.equals("CHEAP")==false) {
-            System.out.println("Команда remove_any_by_type состоит из 2 слов : команда и типа билета('VIP','BUDGETARY','CHEAP')");
-            return;
+            throw new NoSuchTypeException("Команда remove_any_by_type состоит из 2 слов : команда и типа билета('VIP','BUDGETARY','CHEAP')");
+
         }
 
         TicketType ticketType;

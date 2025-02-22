@@ -1,5 +1,6 @@
 package org.example.commands;
 
+import org.example.exeptions.ScriptRecursionException;
 import org.example.managers.CollectionManager;
 import org.example.managers.CommandManager;
 
@@ -37,8 +38,7 @@ public class ExecuteScript extends Command implements Executable {
 
         firstCommand=false;
         if (executedFiles.contains(splitedConsoleRead[1]) & !firstCommand) {
-            System.out.println("Запущена защита от рекурскии : файл не должен вызывать сам себя");
-            return;
+            throw new ScriptRecursionException("Запущена защита от рекурскии : файл не должен вызывать сам себя");
         }
         executedFiles.add(splitedConsoleRead[1]);
 

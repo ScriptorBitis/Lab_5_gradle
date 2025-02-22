@@ -2,16 +2,21 @@ package org.example.utility;
 
 
 import org.example.commands.*;
+import org.example.exeptions.NoKeyException;
+import org.example.exeptions.NoSuchTypeException;
+import org.example.exeptions.ScriptRecursionException;
+import org.example.exeptions.WrongIdInputException;
 import org.example.managers.CollectionManager;
 import org.example.managers.CommandManager;
 import org.example.models.*;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
-import static org.example.managers.DumpManager.fillUpCollection;
 
+import static org.example.managers.DumpManager.fillUpCollection;
 
 
 public class Engine {
@@ -24,7 +29,7 @@ public class Engine {
 
     public static void runProgramm() {
 
-        CollectionManager collectionManager=new CollectionManager(new HashMap<String,Ticket>());
+        CollectionManager collectionManager = new CollectionManager(new HashMap<String, Ticket>());
 
         CommandManager.setUpCommand(new Help(collectionManager));
         CommandManager.setUpCommand(new Exit(collectionManager));
@@ -41,7 +46,7 @@ public class Engine {
         CommandManager.setUpCommand(new RemoveGreater(collectionManager));
         CommandManager.setUpCommand(new RemoveLower(collectionManager));
         CommandManager.setUpCommand(new Save(collectionManager));
-        CommandManager.setUpCommand(new ExecuteScript(2,collectionManager));
+        CommandManager.setUpCommand(new ExecuteScript(2, collectionManager));
 
 
         try {
@@ -52,12 +57,24 @@ public class Engine {
         }
 
         while (flag) {
+
+
             try {
                 CommandManager.setUserRequest(consoleRead.nextLine().trim().split(" "));
             } catch (NoSuchElementException e) {
                 System.out.println("Ярослав Вадимович, не надо никаких ctrl+d, пожалуйста\nЯ закрою прогу, ибо не надо всякую фигню забивать в консоль");
                 return;
+            } catch (ScriptRecursionException e) {
+                System.out.println(e.getMessage());
+            } catch (WrongIdInputException e) {
+                System.out.println(e.getMessage());
+            } catch (NoKeyException e) {
+                System.out.println(e.getMessage());
+            } catch (NoSuchTypeException e) {
+                System.out.println(e.getMessage());
             }
+
+
         }
     }
 
