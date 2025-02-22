@@ -1,57 +1,22 @@
-package utility.console;
-import java.util.NoSuchElementException;
-import java.lang.IllegalStateException;
+package org.example.utility.console;
+
 import java.util.Scanner;
+import org.example.exeptions.ЕmergencyЕxitExeption;
 
-public class StandartConsole implements Console{
+public class StandartConsole implements Console {
+    private Scanner scanner = new Scanner(System.in);
 
-    @Override
-    public void print(Object obj) {
-
+    public StandartConsole(Scanner scanner) {
+        this.scanner = scanner;
     }
 
     @Override
-    public void println(Object obj) {
-
-    }
-
-    @Override
-    public String readln() {
-        return "";
-    }
-
-    @Override
-    public boolean isCanReadln() {
-        return false;
-    }
-
-    @Override
-    public void printError(Object obj) {
-
-    }
-
-    @Override
-    public void printTable(Object obj1, Object obj2) {
-
-    }
-
-    @Override
-    public void prompt() {
-
-    }
-
-    @Override
-    public String getPrompt() {
-        return "";
-    }
-
-    @Override
-    public void selectFileScanner(Scanner obj) {
-
-    }
-
-    @Override
-    public void selectConsoleScanner() {
-
+    public String getUserInputString() {
+        String userInput = scanner.nextLine().trim();
+        if (userInput.equals("exit")) {
+            throw new ЕmergencyЕxitExeption("Выход из консоли");
+        }
+        return userInput;
     }
 }
+

@@ -9,7 +9,6 @@ public class Event implements Validatable {
     private String description; //Поле может быть null
 
     public Event() {
-
     }
 
     public static class Builder {

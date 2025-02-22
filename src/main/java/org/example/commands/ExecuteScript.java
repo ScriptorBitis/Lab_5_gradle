@@ -44,15 +44,12 @@ public class ExecuteScript extends Command implements Executable {
 
 
         try {
-
-
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
                 String[] scriptLine = scanner.nextLine().trim().split(" ");
                 System.out.println("\nВыполняется строка " + Arrays.toString(scriptLine));
                 CommandManager.setUserRequest(scriptLine);
             }
-
         } catch (FileNotFoundException e) {
                 reportMissingFile();
         }

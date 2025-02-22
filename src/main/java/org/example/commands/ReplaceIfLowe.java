@@ -1,6 +1,6 @@
 package org.example.commands;
 
-import org.example.exeptions.ExitWhileExecuting;
+import org.example.exeptions.ЕmergencyЕxitExeption;
 import org.example.models.Ticket;
 import org.example.models.creators.TicketCreator;
 import org.example.managers.CollectionManager;
@@ -40,7 +40,7 @@ public class ReplaceIfLowe extends Command implements Executable {
                 String key = consoleRead.nextLine();
                 if (key.equals("exit")){
                     System.out.println("Возвращение на домашнюю страницу");
-                    throw new ExitWhileExecuting("Выход во время обновления по id");
+                    throw new ЕmergencyЕxitExeption("Выход во время обновления по id");
                 }
                 if (this.collectionManager.getCollection().containsKey(key)) {
                     System.out.println(this.collectionManager.getCollection().get(key).toString());
@@ -69,7 +69,7 @@ public class ReplaceIfLowe extends Command implements Executable {
                     System.out.println("Ключ введен неверно");
                 }
             }while (pass);
-        } catch (ExitWhileExecuting exeption) {
+        } catch (ЕmergencyЕxitExeption exeption) {
             return;
         }
     }
