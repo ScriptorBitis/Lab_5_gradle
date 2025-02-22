@@ -24,16 +24,7 @@ public class Engine {
 
     public static void runProgramm() {
 
-        CollectionManager collectionManager=new CollectionManager(null);
-//        Ticket.Builder builder = new Ticket.Builder();
-//        Coordinates.Builder builder1 = new Coordinates.Builder();
-//        Coordinates coordinates = builder1.x(15).y(Double.valueOf(24)).build();
-//        Ticket ticket = builder.price(1500).name("Билетик 1").coordinates(coordinates).discount(15).refundable(true).type(TicketType.CHEAP).build();
-//        collectionManager.addTicket("aboba1", ticket);
-//
-//        coordinates = builder1.x(125).y(Double.valueOf(324)).build();
-//        ticket = builder.price(3500).name("Билетик 2").coordinates(coordinates).discount(25).refundable(false).type(TicketType.VIP).build();
-//        collectionManager.addTicket("aboba2", ticket);
+        CollectionManager collectionManager=new CollectionManager(new HashMap<String,Ticket>());
 
         CommandManager.setUpCommand(new Help(collectionManager));
         CommandManager.setUpCommand(new Exit(collectionManager));
@@ -50,23 +41,22 @@ public class Engine {
         CommandManager.setUpCommand(new RemoveGreater(collectionManager));
         CommandManager.setUpCommand(new RemoveLower(collectionManager));
         CommandManager.setUpCommand(new Save(collectionManager));
+        CommandManager.setUpCommand(new ExecuteScript(2,collectionManager));
 
 
-
-        // позже считать из файла
 
         try {
             collectionManager.setCollection(fillUpCollection());
 
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println("Коллекцию считать не удалось!Файл поврежден или отсутствует!");
         }
 
         do {
             try {
                 CommandManager.setUserRequest(consoleRead.nextLine().trim().split(" "));
             } catch (NoSuchElementException e) {
-                System.out.println("Ярослав Вадимович, не надо никаких ctrl+d, пожалуйста\nЯ закрою прогу, ибо нехуй всякую хуйню забивать в консоль");
+                System.out.println("Ярослав Вадимович, не надо никаких ctrl+d, пожалуйста\nЯ закрою прогу, ибо не надо всякую фигню забивать в консоль");
                 return;
             }
         } while (flag);

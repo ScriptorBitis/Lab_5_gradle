@@ -12,7 +12,6 @@ public class Event implements Validatable {
 
     }
 
-    // вместо перегрузки rjycnhernjhf мы делаем билдер
     public static class Builder {
         private String name = null;
         private int ticketsCount = 0;
@@ -79,7 +78,7 @@ public class Event implements Validatable {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", ticketsCount=" + ticketsCount +
-                ", description=" + description + //Убрал ' ', чтобы не путаться с null
+                ", description=" + description +
                 '}';
     }
 

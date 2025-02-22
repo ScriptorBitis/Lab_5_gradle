@@ -26,7 +26,7 @@ public class Info extends Command implements Executable{
                 "Количество элементов : "+ this.collectionManager.getCollection().size()+"\n"+
                 "Тип : " + this.collectionManager.getCollection().getClass().getSimpleName()+"\n"+
                 "Время инициализации : "+ this.collectionManager.getInitializationDate()+"\n"+
-                "Набор доступных ключей : "+ this.collectionManager.getCollection().keySet()+"\n"
+                "Набор доступных ключей : "+ this.collectionManager.getCollection().keySet()
 
 
 

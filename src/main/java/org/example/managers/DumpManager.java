@@ -22,7 +22,7 @@ public class DumpManager {
         Type type = new TypeToken<HashMap<String, Ticket>>() {}.getType();
 
         //try-with-resources
-        try (FileReader fileReader = new FileReader("Lab5_data.json")) {
+        try (FileReader fileReader = new FileReader("Lab_data.json")) {
 
             HashMap<String, Ticket> tickets = gson.fromJson(fileReader, type);
 
@@ -40,7 +40,7 @@ public class DumpManager {
 
         String json = gson.toJson(collectionManager.getCollection());
         //try-with-resources
-        try (FileWriter fileWriter = new FileWriter("Lab5_data.json")) {
+        try (FileWriter fileWriter = new FileWriter("Lab_data.json")) {
             fileWriter.write(json);
             //collectionManager.getCOLLECTION().toString()
 

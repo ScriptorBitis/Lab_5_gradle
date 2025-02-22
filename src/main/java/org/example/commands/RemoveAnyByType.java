@@ -24,7 +24,7 @@ public class RemoveAnyByType extends Command implements Executable {
     @Override
     public void execute(String[] splitedConsoleRead) {
         if (splitedConsoleRead.length != this.getWordsCount()) {
-            System.out.println("Команда remove_by_any состоит из 2 слов : команда и типа билета('VIP','BUDGETARY','CHEAP')");
+            System.out.println("Команда remove_any_by_type состоит из 2 слов : команда и типа билета('VIP','BUDGETARY','CHEAP')");
             return;
         }
         String type=splitedConsoleRead[1];
