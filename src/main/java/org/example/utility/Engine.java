@@ -44,7 +44,6 @@ public class Engine {
         CommandManager.setUpCommand(new ExecuteScript(2,collectionManager));
 
 
-
         try {
             collectionManager.setCollection(fillUpCollection());
 
@@ -52,14 +51,14 @@ public class Engine {
             System.out.println("Коллекцию считать не удалось!Файл поврежден или отсутствует!");
         }
 
-        do {
+        while (flag) {
             try {
                 CommandManager.setUserRequest(consoleRead.nextLine().trim().split(" "));
             } catch (NoSuchElementException e) {
                 System.out.println("Ярослав Вадимович, не надо никаких ctrl+d, пожалуйста\nЯ закрою прогу, ибо не надо всякую фигню забивать в консоль");
                 return;
             }
-        } while (flag);
+        }
     }
 
 

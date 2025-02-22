@@ -14,19 +14,14 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
-
 public class DumpManager {
 
     static public Map<String, Ticket> fillUpCollection()throws IOException{
         Gson gson=new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter()).create();
         Type type = new TypeToken<HashMap<String, Ticket>>() {}.getType();
 
-        //try-with-resources
         try (FileReader fileReader = new FileReader("Lab_data.json")) {
-
             HashMap<String, Ticket> tickets = gson.fromJson(fileReader, type);
-
-
             System.out.println("Файл прочитан успешно! Приятного изнасилования моей лабы =) ");
             return tickets;
         }
@@ -36,17 +31,9 @@ public class DumpManager {
 
     static public void writeCollection(CollectionManager collectionManager) throws IOException {
         Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter()).create();
-
-
         String json = gson.toJson(collectionManager.getCollection());
-        //try-with-resources
         try (FileWriter fileWriter = new FileWriter("Lab_data.json")) {
             fileWriter.write(json);
-            //collectionManager.getCOLLECTION().toString()
-
         }
-
-
     }
-
 }

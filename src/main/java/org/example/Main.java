@@ -1,7 +1,7 @@
 package org.example;
 
 import org.example.utility.Engine;
-import org.example.exeptions.ЕmergencyЕxitExeption;
+import org.example.exeptions.ЕmergencyЕxitException;
 
 public class Main {
     public static void main(String[] args) {
@@ -10,7 +10,7 @@ public class Main {
 
         try {
             Engine.runProgramm();
-        } catch (ЕmergencyЕxitExeption e) {
+        } catch (ЕmergencyЕxitException e) {
             System.out.println(e.getMessage());
         }
 

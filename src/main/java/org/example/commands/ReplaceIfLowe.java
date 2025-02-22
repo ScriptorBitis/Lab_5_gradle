@@ -1,9 +1,11 @@
 package org.example.commands;
 
-import org.example.exeptions.ЕmergencyЕxitExeption;
+import org.example.exeptions.ЕmergencyЕxitException;
 import org.example.models.Ticket;
 import org.example.models.creators.TicketCreator;
 import org.example.managers.CollectionManager;
+import org.example.utility.console.Console;
+import org.example.utility.console.StandartConsole;
 
 import java.util.Scanner;
 
@@ -27,51 +29,23 @@ public class ReplaceIfLowe extends Command implements Executable {
 
     @Override
     public void execute(String[] splitedConsoleRead) {
-        Scanner consoleRead = new Scanner(System.in);
-        Ticket ticket = TicketCreator.createTicket("Создание билета для сравнения !цены! и возможной последующей замены");
-        System.out.println("Ваш созданный билет:\n"+ticket.toString());
+        Console console = new StandartConsole(new Scanner(System.in));
 
-
-        boolean pass=true;
-        try {
-            do {
-                System.out.println("Доступные ключи для доступа к билетам : " + this.collectionManager.getCollection().keySet());
-                System.out.println("Введите ключ");
-                String key = consoleRead.nextLine();
-                if (key.equals("exit")){
-                    System.out.println("Возвращение на домашнюю страницу");
-                    throw new ЕmergencyЕxitExeption("Выход во время обновления по id");
-                }
-                if (this.collectionManager.getCollection().containsKey(key)) {
-                    System.out.println(this.collectionManager.getCollection().get(key).toString());
-                    System.out.println("Вы хотели сравнить с этим билетом?\n1 : да\n2 : нет\n3 : прервать замену билета");
-                    String userDecision = consoleRead.nextLine().trim();
-                    switch (userDecision){
-                        case ("1"):
-                            pass=false;
-                            if (this.collectionManager.getCollection().get(key).getPrice()>ticket.getPrice()){
-                                this.collectionManager.getCollection().replace(key,ticket);
-                                System.out.println("Билет успешно обновлен!");
-                            }else {
-                                System.out.println("Билет не обновлен: новая цена больше старой");
-                            }
-                            break;
-                        case ("2"):
-                            break;
-                        case ("3"):
-                            pass=false;
-                            System.out.println("Замена билета прервана!");
-                            break;
-                        default:
-                            System.out.println("Должно быть введено значение, равное '1' или '2'");
-                    }
-                } else {
-                    System.out.println("Ключ введен неверно");
-                }
-            }while (pass);
-        } catch (ЕmergencyЕxitExeption exeption) {
+        if (!collectionManager.getCollection().containsKey(splitedConsoleRead[1])){
+            System.out.println("Такого ключа нет! Ознакомьтесь с доступными ключами, введя 'info'");
             return;
         }
+
+        Ticket ticket = TicketCreator.createTicket("Создание билета для сравнения !цены! и возможной последующей замены");
+
+        if (collectionManager.getCollection().get(splitedConsoleRead[1]).getPrice()>ticket.getPrice()){
+            collectionManager.getCollection().replace(splitedConsoleRead[1],ticket);
+            System.out.println("Билет заменен!");
+            return;
+
+        }
+        System.out.println("Билет не был заменет : новое значение цены не меньше старого.");
+
     }
 
     @Override

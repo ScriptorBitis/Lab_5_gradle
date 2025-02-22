@@ -6,7 +6,7 @@ import org.example.managers.CollectionManager;
 
 import java.util.Map;
 
-public class UpdateId extends Command implements Executable{
+public class UpdateId extends Command implements Executable {
 
     public UpdateId(int wordsCount, CollectionManager collectionManager) {
         super(wordsCount, collectionManager);
@@ -31,26 +31,21 @@ public class UpdateId extends Command implements Executable{
             return;
         }
 
-        int id;
-        Map<String,Ticket> COLLECTION = this.collectionManager.getCollection();
-        try { id=Integer.valueOf(splitedConsoleRead[1]);
-            for (Ticket ticket: COLLECTION.values()){
-                if (ticket.getId()==id){
-                   for (String key: COLLECTION.keySet()){
-                       if (ticket.equals(COLLECTION.get(key))){
-                           this.collectionManager.addTicket(key, TicketCreator.createTicket("Для обновление элемента коллеции надо ввести параметры."));
-                           System.out.println("Элемент с id "+id+" обновлен");
-                       }
-                   }
-                    return;
-                }
-                System.out.println("Элемента с id "+id+" не существует!");
+        int id=0;
+        try {
+            id = Integer.valueOf(splitedConsoleRead[1]);
+        } catch (NumberFormatException e) {
+            System.out.println("id введен неверно.id - число");
+        }
+
+        Map<String, Ticket> collection = this.collectionManager.getCollection();
+        for (String key : collection.keySet()) {
+            if (collection.get(key).getId()==id) {
+                collection.replace(key,TicketCreator.createTicket("Создание билета для замены по id"));
+
             }
-        }catch (NumberFormatException exception){
-            System.out.println("id должен быть числом\nВозвращение на главное страницу");
         }
     }
-
 
 
     @Override

@@ -34,7 +34,7 @@ public class Save extends Command implements Executable{
             DumpManager.writeCollection(collectionManager);
             System.out.println("Коллекция записана в файл!");
         } catch (IOException e) {
-            System.out.println(e.toString());
+            System.out.println(e.getMessage());
         }
     }
 

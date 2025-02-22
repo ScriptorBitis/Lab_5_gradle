@@ -4,6 +4,12 @@ import org.example.managers.CollectionManager;
 import org.example.models.Ticket;
 import org.example.models.TicketType;
 import org.example.utility.Engine;
+import org.example.utility.console.Console;
+import org.example.utility.console.StandartConsole;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 
 public class RemoveAnyByType extends Command implements Executable {
     public RemoveAnyByType(int wordsCount, CollectionManager collectionManager) {
@@ -23,31 +29,30 @@ public class RemoveAnyByType extends Command implements Executable {
 
     @Override
     public void execute(String[] splitedConsoleRead) {
+
         if (splitedConsoleRead.length != this.getWordsCount()) {
             System.out.println("Команда remove_any_by_type состоит из 2 слов : команда и типа билета('VIP','BUDGETARY','CHEAP')");
             return;
         }
-        String type=splitedConsoleRead[1];
-        TicketType ticketType;
-        switch (type){
-            case ("VIP"):
-                ticketType=TicketType.VIP;
-                break;
-            case ("BUDGETARY"):
-                ticketType=TicketType.BUDGETARY;
-                break;
-            case ("CHEAP"):
-                ticketType=TicketType.CHEAP;
-                break;
-            default:
-                System.out.println("Тип билета не распозан. Введите одно из доступных значений: 'VIP','BUDGETARY','CHEAP' ");
-                return;
 
+        String type = splitedConsoleRead[1];
+        if (type.equals("VIP") || type.equals("BUDGETARY") || type.equals("CHEAP")==false) {
+            System.out.println("Команда remove_any_by_type состоит из 2 слов : команда и типа билета('VIP','BUDGETARY','CHEAP')");
+            return;
         }
-        for (String key:getCollectionManager().getCollection().keySet()){
-            Ticket ticket=getCollectionManager().getCollection().get(key);
-            if (ticket.getType().equals(ticketType)){
-                System.out.println("Удаление объекта "+getCollectionManager().getCollection().get(key).toString());
+
+        TicketType ticketType;
+        Map<String, TicketType> ticketsTypes = new HashMap<>();
+        ticketsTypes.put("VIP", TicketType.VIP);
+        ticketsTypes.put("BUDGETARY", TicketType.BUDGETARY);
+        ticketsTypes.put("CHEAP", TicketType.CHEAP);
+
+        ticketType = ticketsTypes.get(type);
+
+        for (String key : getCollectionManager().getCollection().keySet()) {
+            Ticket ticket = getCollectionManager().getCollection().get(key);
+            if (ticket.getType().equals(ticketType)) {
+                System.out.println("Удаление объекта " + getCollectionManager().getCollection().get(key).toString());
                 getCollectionManager().getCollection().remove(key);
                 return;
 
@@ -55,6 +60,7 @@ public class RemoveAnyByType extends Command implements Executable {
 
         }
     }
+
 
     @Override
     public String toString() {

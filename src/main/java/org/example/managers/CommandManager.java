@@ -1,15 +1,12 @@
 package org.example.managers;
 
 import org.example.commands.*;
-
-
 import java.util.HashMap;
 import java.util.Map;
 
 
 public class CommandManager {
     private final static Map<String, Executable> COMMAND_MAP = new HashMap<>();
-
 
     public static void setUpCommand(Executable command) {
         COMMAND_MAP.put(command.toString(), command);
