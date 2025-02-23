@@ -6,21 +6,24 @@ import java.util.Map;
 
 
 public class CommandManager {
-    private final static Map<String, Executable> COMMAND_MAP = new HashMap<>();
+    private final  Map<String, Executable> COMMAND_MAP = new HashMap<>();
 
-    public static void setUpCommand(Executable command) {
+    public CommandManager(HashMap<String, Executable> stringExecutableHashMap) {
+    }
+
+    public void setUpCommand(Executable command) {
         COMMAND_MAP.put(command.toString(), command);
 
     }
 
-    public static final Map<String, Executable> getCommands() {
+    public final Map<String, Executable> getCommands() {
         return COMMAND_MAP;
     }
 
-    public static void setUserRequest(String[] splitedRequest) {
+    public void setUserRequest(String[] splitedRequest) {
         String request = splitedRequest[0];
-        if (CommandManager.getCommands().containsKey(request)) {
-            Executable command= CommandManager.getCommands().get(request);
+        if (this.getCommands().containsKey(request)) {
+            Executable command= this.getCommands().get(request);
             command.execute(splitedRequest);
         } else {
             System.out.println("Команда не распознана! Попробуйте ознакомиться с перечнем команд, введя 'help'.");

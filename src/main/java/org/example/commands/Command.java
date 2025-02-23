@@ -2,10 +2,12 @@ package org.example.commands;
 
 
 import org.example.managers.CollectionManager;
+import org.example.utility.Engine;
 
 public abstract class Command {
     int wordsCount;
     protected CollectionManager collectionManager;
+    protected Engine engine;
 
     public Command(int wordsCount, CollectionManager collectionManager) {
         this.wordsCount = wordsCount;
@@ -23,6 +25,12 @@ public abstract class Command {
     public Command() {
     }
 
+    public Command(int wordsCount,CollectionManager collectionManager ,Engine engine) {
+        this.wordsCount = wordsCount;
+        this.collectionManager = collectionManager;
+        this.engine = engine;
+    }
+
     public CollectionManager getCollectionManager() {
         return collectionManager;
     }
@@ -31,4 +39,7 @@ public abstract class Command {
         return wordsCount;
     }
 
+    public Engine getEngine() {
+        return engine;
+    }
 }

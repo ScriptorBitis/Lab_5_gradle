@@ -3,6 +3,7 @@ package org.example.commands;
 import org.example.exeptions.ScriptRecursionException;
 import org.example.managers.CollectionManager;
 import org.example.managers.CommandManager;
+import org.example.utility.Engine;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,21 +16,9 @@ public class ExecuteScript extends Command implements Executable {
     private HashSet<String> executedFiles= new HashSet<>();
     private boolean firstCommand;
 
-    public ExecuteScript(int wordsCount, CollectionManager collectionManager) {
-        super(wordsCount, collectionManager);
+    public ExecuteScript(int wordsCount, CollectionManager collectionManager, Engine engine) {
+        super(wordsCount, collectionManager, engine);
     }
-
-    public ExecuteScript(int wordsCount) {
-        super(wordsCount);
-    }
-
-    public ExecuteScript(CollectionManager collectionManager) {
-        super(collectionManager);
-    }
-
-    public ExecuteScript() {
-    }
-
 
     @Override
     public void execute(String[] splitedConsoleRead) {
@@ -42,18 +31,17 @@ public class ExecuteScript extends Command implements Executable {
         }
         executedFiles.add(splitedConsoleRead[1]);
 
-
         try {
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
                 String[] scriptLine = scanner.nextLine().trim().split(" ");
                 System.out.println("\nВыполняется строка " + Arrays.toString(scriptLine));
-                CommandManager.setUserRequest(scriptLine);
+
+                this.engine.getCommandManager().setUserRequest(scriptLine);
             }
         } catch (FileNotFoundException e) {
                 reportMissingFile();
         }
-
 
         firstCommand=true;
         executedFiles.clear();

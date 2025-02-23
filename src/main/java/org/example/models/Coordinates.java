@@ -8,7 +8,6 @@ public class Coordinates implements Validatable {
     private double x;
     private Double y; //Максимальное значение поля: 484, Поле не может быть null
 
-
     public Double getY() {
         return y;
     }
@@ -20,7 +19,6 @@ public class Coordinates implements Validatable {
     public static class Builder {
         private double x=0;
         private Double y=null;
-
 
         public Builder x(int x) {
             this.x = x;

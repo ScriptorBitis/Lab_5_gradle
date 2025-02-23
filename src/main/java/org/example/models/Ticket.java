@@ -144,6 +144,4 @@ public class Ticket implements Validatable {
                 ", event=" + event +
                 '}';
     }
-
-
 }

@@ -20,33 +20,36 @@ import static org.example.managers.DumpManager.fillUpCollection;
 
 
 public class Engine {
-    private static boolean flag = true;
-    private static Scanner consoleRead = new Scanner(System.in);
+    private boolean flag = true;
+    private Scanner consoleRead = new Scanner(System.in);
+    private CollectionManager collectionManager;
+    private CommandManager commandManager;
 
-    public static void finishProgramm() {
+    public void finishProgramm() {
         flag = false;
     }
 
-    public static void runProgramm() {
+    public void runProgramm() {
 
-        CollectionManager collectionManager = new CollectionManager(new HashMap<String, Ticket>());
+        this.collectionManager= new CollectionManager(new HashMap<String, Ticket>());
+        this.commandManager=new CommandManager(new HashMap<String,Executable>());
 
-        CommandManager.setUpCommand(new Help(collectionManager));
-        CommandManager.setUpCommand(new Exit(collectionManager));
-        CommandManager.setUpCommand(new Insert(2, collectionManager));
-        CommandManager.setUpCommand(new Show(collectionManager));
-        CommandManager.setUpCommand(new Clear(collectionManager));
-        CommandManager.setUpCommand(new Info(collectionManager));
-        CommandManager.setUpCommand(new RemoveKey(2, collectionManager));
-        CommandManager.setUpCommand(new UpdateId(2, collectionManager));
-        CommandManager.setUpCommand(new PrintAscending(collectionManager));
-        CommandManager.setUpCommand(new MaxByCoordinates(collectionManager));
-        CommandManager.setUpCommand(new ReplaceIfLowe(collectionManager));
-        CommandManager.setUpCommand(new RemoveAnyByType(2, collectionManager));
-        CommandManager.setUpCommand(new RemoveGreater(collectionManager));
-        CommandManager.setUpCommand(new RemoveLower(collectionManager));
-        CommandManager.setUpCommand(new Save(collectionManager));
-        CommandManager.setUpCommand(new ExecuteScript(2, collectionManager));
+        commandManager.setUpCommand(new Help(collectionManager));
+        commandManager.setUpCommand(new Exit(1,collectionManager,this));
+        commandManager.setUpCommand(new Insert(2, collectionManager));
+        commandManager.setUpCommand(new Show(collectionManager));
+        commandManager.setUpCommand(new Clear(collectionManager));
+        commandManager.setUpCommand(new Info(collectionManager));
+        commandManager.setUpCommand(new RemoveKey(2, collectionManager));
+        commandManager.setUpCommand(new UpdateId(2, collectionManager));
+        commandManager.setUpCommand(new PrintAscending(collectionManager));
+        commandManager.setUpCommand(new MaxByCoordinates(collectionManager));
+        commandManager.setUpCommand(new ReplaceIfLowe(collectionManager));
+        commandManager.setUpCommand(new RemoveAnyByType(2, collectionManager));
+        commandManager.setUpCommand(new RemoveGreater(collectionManager));
+        commandManager.setUpCommand(new RemoveLower(collectionManager));
+        commandManager.setUpCommand(new Save(collectionManager));
+        commandManager.setUpCommand(new ExecuteScript(2, collectionManager,this));
 
 
         try {
@@ -58,13 +61,13 @@ public class Engine {
 
         while (flag) {
 
-
+            //TODO сократить catch
             try {
-                CommandManager.setUserRequest(consoleRead.nextLine().trim().split(" "));
+                commandManager.setUserRequest(consoleRead.nextLine().trim().split(" "));
             } catch (NoSuchElementException e) {
                 System.out.println("Ярослав Вадимович, не надо никаких ctrl+d, пожалуйста\nЯ закрою прогу, ибо не надо всякую фигню забивать в консоль");
                 return;
-            } catch (ScriptRecursionException e) {
+            } catch (ScriptRecursionException  e) {
                 System.out.println(e.getMessage());
             } catch (WrongIdInputException e) {
                 System.out.println(e.getMessage());
@@ -73,10 +76,14 @@ public class Engine {
             } catch (NoSuchTypeException e) {
                 System.out.println(e.getMessage());
             }
-
-
         }
     }
 
+    public CollectionManager getCollectionManager() {
+        return collectionManager;
+    }
 
+    public CommandManager getCommandManager() {
+        return commandManager;
+    }
 }

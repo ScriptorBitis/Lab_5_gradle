@@ -30,7 +30,6 @@ public class Insert extends Command implements Executable {
                 return;
         }
 
-
         Ticket ticket = TicketCreator.createTicket("Инициализировано создание билета");
 
         if (ticket.validate()) {

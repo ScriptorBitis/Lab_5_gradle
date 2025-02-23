@@ -27,12 +27,6 @@ public class Info extends Command implements Executable{
                 "Тип : " + this.collectionManager.getCollection().getClass().getSimpleName()+"\n"+
                 "Время инициализации : "+ this.collectionManager.getInitializationDate()+"\n"+
                 "Набор доступных ключей : "+ this.collectionManager.getCollection().keySet()
-
-
-
-
-
-
         );
     }
 
