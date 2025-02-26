@@ -2,21 +2,17 @@ package org.example.utility;
 
 
 import org.example.commands.*;
-import org.example.exeptions.NoKeyException;
-import org.example.exeptions.NoSuchTypeException;
-import org.example.exeptions.ScriptRecursionException;
-import org.example.exeptions.WrongIdInputException;
+import org.example.exeptions.*;
 import org.example.managers.CollectionManager;
 import org.example.managers.CommandManager;
 import org.example.models.*;
 
-import java.io.IOException;
+
 import java.util.HashMap;
-import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
-
 import static org.example.managers.DumpManager.fillUpCollection;
+
 
 
 public class Engine {
@@ -34,29 +30,30 @@ public class Engine {
         this.collectionManager= new CollectionManager(new HashMap<String, Ticket>());
         this.commandManager=new CommandManager(new HashMap<String,Executable>());
 
-        commandManager.setUpCommand(new Help(collectionManager));
+        commandManager.setUpCommand(new Help(1,collectionManager,this));
         commandManager.setUpCommand(new Exit(1,collectionManager,this));
         commandManager.setUpCommand(new Insert(2, collectionManager));
-        commandManager.setUpCommand(new Show(collectionManager));
-        commandManager.setUpCommand(new Clear(collectionManager));
-        commandManager.setUpCommand(new Info(collectionManager));
+        commandManager.setUpCommand(new Show(1,collectionManager));
+        commandManager.setUpCommand(new Clear(1,collectionManager));
+        commandManager.setUpCommand(new Info(1,collectionManager));
         commandManager.setUpCommand(new RemoveKey(2, collectionManager));
         commandManager.setUpCommand(new UpdateId(2, collectionManager));
-        commandManager.setUpCommand(new PrintAscending(collectionManager));
-        commandManager.setUpCommand(new MaxByCoordinates(collectionManager));
-        commandManager.setUpCommand(new ReplaceIfLowe(collectionManager));
+        commandManager.setUpCommand(new PrintAscending(1,collectionManager));
+        commandManager.setUpCommand(new MaxByCoordinates(1,collectionManager));
+        commandManager.setUpCommand(new ReplaceIfLowe(1,collectionManager));
         commandManager.setUpCommand(new RemoveAnyByType(2, collectionManager));
-        commandManager.setUpCommand(new RemoveGreater(collectionManager));
-        commandManager.setUpCommand(new RemoveLower(collectionManager));
-        commandManager.setUpCommand(new Save(collectionManager));
+        commandManager.setUpCommand(new RemoveGreater(1,collectionManager));
+        commandManager.setUpCommand(new RemoveLower(1,collectionManager));
+        commandManager.setUpCommand(new Save(1,collectionManager));
         commandManager.setUpCommand(new ExecuteScript(2, collectionManager,this));
+
 
 
         try {
             collectionManager.setCollection(fillUpCollection());
 
-        } catch (IOException e) {
-            System.out.println("Коллекцию считать не удалось!Файл поврежден или отсутствует!");
+        } catch (NoSuchEnvironmentVariablesException e) {
+            System.out.println(e.getMessage());
         }
 
         while (flag) {
@@ -67,15 +64,11 @@ public class Engine {
             } catch (NoSuchElementException e) {
                 System.out.println("Ярослав Вадимович, не надо никаких ctrl+d, пожалуйста\nЯ закрою прогу, ибо не надо всякую фигню забивать в консоль");
                 return;
-            } catch (ScriptRecursionException  e) {
-                System.out.println(e.getMessage());
-            } catch (WrongIdInputException e) {
-                System.out.println(e.getMessage());
-            } catch (NoKeyException e) {
-                System.out.println(e.getMessage());
-            } catch (NoSuchTypeException e) {
-                System.out.println(e.getMessage());
+            } catch (Exception  e) {
+                System.out.println(e);
             }
+
+
         }
     }
 

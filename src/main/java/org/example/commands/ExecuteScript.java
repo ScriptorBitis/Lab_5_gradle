@@ -1,8 +1,9 @@
 package org.example.commands;
 
+import org.example.exeptions.InvalidArgumentsException;
+import org.example.exeptions.NoSuchEnvironmentVariablesException;
 import org.example.exeptions.ScriptRecursionException;
 import org.example.managers.CollectionManager;
-import org.example.managers.CommandManager;
 import org.example.utility.Engine;
 
 import java.io.File;
@@ -22,8 +23,10 @@ public class ExecuteScript extends Command implements Executable {
 
     @Override
     public void execute(String[] splitedConsoleRead) {
-        File file = new File(splitedConsoleRead[1]);
 
+        validateCommand(splitedConsoleRead);
+        File file = new File(System.getenv(splitedConsoleRead[1]));
+        file.setReadable(true);
 
         firstCommand=false;
         if (executedFiles.contains(splitedConsoleRead[1]) & !firstCommand) {
@@ -47,8 +50,22 @@ public class ExecuteScript extends Command implements Executable {
         executedFiles.clear();
     }
 
+    @Override
+    public void validateCommand(String[] splitedConsoleRead) throws InvalidArgumentsException,NoSuchEnvironmentVariablesException,IllegalArgumentException {
+        if (splitedConsoleRead.length!=this.wordsCount){
+            throw new IllegalArgumentException("У команды execute_script file_name 2 аргумента.");
+        }
+        if (System.getenv(splitedConsoleRead[1])==null){
+            throw new NoSuchEnvironmentVariablesException("Введена неправильная переменная окружения!");
+        }
+        File file = new File(splitedConsoleRead[1]);
+        if (!file.exists()){
+            throw new IllegalArgumentException("Файла не существует!");
+        }
+    }
+
     private void reportMissingFile() {
-        System.out.println("Файл не найден, или название введено неверно. Попробуйте еще раз.");
+        System.out.println("Файл не найден, или название переменной введено неверно. Попробуйте еще раз.");
     }
 
     @Override

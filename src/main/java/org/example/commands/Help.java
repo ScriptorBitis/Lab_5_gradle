@@ -3,22 +3,13 @@ package org.example.commands;
 
 import org.example.managers.CollectionManager;
 import org.example.managers.CommandManager;
+import org.example.utility.Engine;
 
 public class Help extends Command implements Executable{
 
-    public Help(int wordsCount, CollectionManager collectionManager) {
-        super(wordsCount, collectionManager);
-    }
 
-    public Help(CollectionManager collectionManager) {
-        super(collectionManager);
-    }
-
-    public Help(int wordsCount) {
-        super(wordsCount);
-    }
-
-    public Help() {
+    public Help(int wordsCount, CollectionManager collectionManager, Engine engine) {
+        super(wordsCount, collectionManager, engine);
     }
 
     @Override

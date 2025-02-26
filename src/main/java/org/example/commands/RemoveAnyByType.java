@@ -1,5 +1,6 @@
 package org.example.commands;
 
+import org.example.exeptions.InvalidArgumentsException;
 import org.example.exeptions.NoSuchTypeException;
 import org.example.managers.CollectionManager;
 import org.example.models.Ticket;
@@ -30,16 +31,10 @@ public class RemoveAnyByType extends Command implements Executable {
 
     @Override
     public void execute(String[] splitedConsoleRead) {
-
-        if (splitedConsoleRead.length != this.getWordsCount()) {
-            System.out.println("Команда remove_any_by_type состоит из 2 слов : команда и типа билета('VIP','BUDGETARY','CHEAP')");
-            return;
-        }
-
+        validateCommand(splitedConsoleRead);
         String type = splitedConsoleRead[1];
         if (type.equals("VIP") || type.equals("BUDGETARY") || type.equals("CHEAP")==false) {
             throw new NoSuchTypeException("Команда remove_any_by_type состоит из 2 слов : команда и типа билета('VIP','BUDGETARY','CHEAP')");
-
         }
 
         TicketType ticketType;
@@ -62,6 +57,12 @@ public class RemoveAnyByType extends Command implements Executable {
         }
     }
 
+    @Override
+    public void validateCommand(String[] splitedConsoleRead) throws InvalidArgumentsException {
+        if (splitedConsoleRead.length != this.getWordsCount()) {
+            throw new InvalidArgumentsException("Команда remove_any_by_type состоит из 2 слов : команда и типа билета('VIP','BUDGETARY','CHEAP')");
+        }
+    }
 
     @Override
     public String toString() {

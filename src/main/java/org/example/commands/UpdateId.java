@@ -1,5 +1,6 @@
 package org.example.commands;
 
+import org.example.exeptions.InvalidArgumentsException;
 import org.example.exeptions.WrongIdInputException;
 import org.example.models.Ticket;
 import org.example.models.creators.TicketCreator;
@@ -27,10 +28,6 @@ public class UpdateId extends Command implements Executable {
     @Override
     public void execute(String[] splitedConsoleRead) {
 
-        if (splitedConsoleRead.length != this.getWordsCount()) {
-            throw new WrongIdInputException("Команда update состоит из команды и ключа .");
-        }
-
         int id=0;
         try {
             id = Integer.valueOf(splitedConsoleRead[1]);
@@ -46,6 +43,16 @@ public class UpdateId extends Command implements Executable {
             }
         }
     }
+
+
+    @Override
+    public void validateCommand(String[] splitedConsoleRead) throws InvalidArgumentsException {
+        if (splitedConsoleRead.length != this.getWordsCount()) {
+            throw new InvalidArgumentsException("Команда update состоит из команды и ключа .");
+        }
+    }
+
+
 
 
     @Override
