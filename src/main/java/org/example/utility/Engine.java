@@ -58,7 +58,7 @@ public class Engine {
 
         while (flag) {
 
-            //TODO сократить catch
+
             try {
                 commandManager.setUserRequest(consoleRead.nextLine().trim().split(" "));
             } catch (NoSuchElementException e) {
