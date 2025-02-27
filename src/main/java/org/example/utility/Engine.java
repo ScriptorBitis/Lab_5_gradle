@@ -9,6 +9,7 @@ import org.example.models.*;
 
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import static org.example.managers.DumpManager.fillUpCollection;
@@ -50,10 +51,12 @@ public class Engine {
 
 
         try {
-            collectionManager.setCollection(fillUpCollection());
+            Map<String,Ticket> tickets =fillUpCollection();
+            collectionManager.setCollection(tickets);
 
         } catch (NoSuchEnvironmentVariablesException e) {
             System.out.println(e.getMessage());
+
         }
 
         while (flag) {
@@ -64,7 +67,11 @@ public class Engine {
             } catch (NoSuchElementException e) {
                 System.out.println("Ярослав Вадимович, не надо никаких ctrl+d, пожалуйста\nЯ закрою прогу, ибо не надо всякую фигню забивать в консоль");
                 return;
-            } catch (Exception  e) {
+            } catch (ЕmergencyЕxitException e) {
+                finishProgramm();
+                System.out.println(e.getMessage());
+            }
+            catch (Exception  e) {
                 System.out.println(e);
             }
 

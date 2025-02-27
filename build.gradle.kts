@@ -1,11 +1,7 @@
-
-
 plugins {
-    id("java")
+    id("com.github.johnrengelman.shadow") version "8.1.1"
+    java
 }
-
-group = "org.example"
-version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -14,14 +10,16 @@ repositories {
 dependencies {
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
-    // https://mvnrepository.com/artifact/com.google.code.gson/gson
     implementation("com.google.code.gson:gson:2.10")
-
 }
 
-
-
-tasks.test {
-    useJUnitPlatform()
+tasks.shadowJar {
+    manifest {
+        attributes["Main-Class"] = "org.example.utility.Main"
+    }
+    archiveClassifier.set("all")
 }
 
+tasks.build {
+    dependsOn(tasks.shadowJar)
+}

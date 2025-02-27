@@ -7,12 +7,11 @@ import org.example.exeptions.ЕmergencyЕxitException;
 
 public class Main {
     public static void main(String[] args) {
-        try {
-            Engine engine=new Engine();
-            engine.runProgramm();
-        } catch (ЕmergencyЕxitException e) {
-            System.out.println(e.getMessage());
-        }
+        //TODO дописать дам менджер ииии дописать валидацию файла(регулярки)
+
+        Engine engine=new Engine();
+        engine.runProgramm();
+
 
     }
 }

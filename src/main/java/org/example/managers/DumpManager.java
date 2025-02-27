@@ -35,7 +35,7 @@ public class DumpManager {
             return tickets;
         } catch (Exception e) {
             System.out.println("Коллекцию считать не удалось!Файл поврежден или отсутствует!");
-            return new HashMap<>();
+            return new HashMap<String,Ticket>();
         }
 
     }
