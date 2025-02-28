@@ -29,6 +29,7 @@ public class UpdateId extends Command implements Executable {
     public void execute(String[] splitedConsoleRead) {
 
         int id=0;
+        this.validateCommand(splitedConsoleRead);
         try {
             id = Integer.valueOf(splitedConsoleRead[1]);
         } catch (NumberFormatException e) {
