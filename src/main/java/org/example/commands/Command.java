@@ -5,9 +5,9 @@ import org.example.managers.CollectionManager;
 import org.example.utility.Engine;
 
 public abstract class Command {
-    int wordsCount;
     protected CollectionManager collectionManager;
     protected Engine engine;
+    protected int wordsCount;
 
     public Command(int wordsCount, CollectionManager collectionManager) {
         this.wordsCount = wordsCount;
@@ -25,7 +25,7 @@ public abstract class Command {
     public Command() {
     }
 
-    public Command(int wordsCount,CollectionManager collectionManager ,Engine engine) {
+    public Command(int wordsCount, CollectionManager collectionManager, Engine engine) {
         this.wordsCount = wordsCount;
         this.collectionManager = collectionManager;
         this.engine = engine;

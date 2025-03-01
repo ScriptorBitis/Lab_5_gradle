@@ -2,7 +2,7 @@ package org.example.commands;
 
 
 import org.example.managers.CollectionManager;
-import org.example.models.*;
+import org.example.models.Ticket;
 
 public class MaxByCoordinates extends Command implements Executable {
 
@@ -10,25 +10,14 @@ public class MaxByCoordinates extends Command implements Executable {
         super(wordsCount, collectionManager);
     }
 
-    public MaxByCoordinates(CollectionManager collectionManager) {
-        super(collectionManager);
-    }
-
-    public MaxByCoordinates(int wordsCount) {
-        super(wordsCount);
-    }
-
-    public MaxByCoordinates() {
-    }
-
     @Override
     public void execute(String[] splitedConsoleRead) {
-        Ticket ticket=null;
-        double coordinatesSum=Double.MIN_VALUE;
-        for (Ticket ticket1:this.collectionManager.getCollection().values()){
-            if (Math.pow(ticket1.getCoordinates().getX(),2)+Math.pow(ticket1.getCoordinates().getY(),2)>coordinatesSum){
-                coordinatesSum=Math.pow(ticket1.getCoordinates().getX(),2)+Math.pow(ticket1.getCoordinates().getY(),2);
-                ticket=ticket1;
+        Ticket ticket = null;
+        double coordinatesSum = Double.MIN_VALUE;
+        for (Ticket ticket1 : this.collectionManager.getCollection().values()) {
+            if (Math.pow(ticket1.getCoordinates().getX(), 2) + Math.pow(ticket1.getCoordinates().getY(), 2) > coordinatesSum) {
+                coordinatesSum = Math.pow(ticket1.getCoordinates().getX(), 2) + Math.pow(ticket1.getCoordinates().getY(), 2);
+                ticket = ticket1;
             }
         }
         System.out.println(ticket.toString());

@@ -1,12 +1,13 @@
 package org.example.models;
 
 import org.example.utility.Validatable;
+
 import java.time.LocalDateTime;
 
 public class Ticket implements Validatable {
     private final int id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
-    private String name; //Поле не может быть null, Строка не может быть пустой
     private final java.time.LocalDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
+    private String name; //Поле не может быть null, Строка не может быть пустой
     private Integer price; //Поле может быть null, Значение поля должно быть больше 0
     private float discount; //Значение поля должно быть больше 0, Максимальное значение поля: 100
     private Boolean refundable; //Поле может быть null
@@ -16,15 +17,19 @@ public class Ticket implements Validatable {
 
     public Ticket() {
         this.creationDate = LocalDateTime.now().withNano(0);
-        this.id = this.hashCode();
+        this.id = IdGenerator.assigntTicketId();
     }
 
     public int getId() {
         return id;
     }
 
+    public Event getEvent() {
+        return event;
+    }
+
     public Integer getPrice() {
-        if (this.price==null){
+        if (this.price == null) {
             return Integer.MIN_VALUE;
         }
         return price;
@@ -38,15 +43,39 @@ public class Ticket implements Validatable {
         return type;
     }
 
+    @Override
+    public boolean validate() {
+        if (id <= 0
+                || creationDate == null
+                || (price != null && price <= 0)
+                || discount <= 0.0
+                || discount >100.0
+                || refundable==null
+                || coordinates == null
+                || name == null
+                || name.isEmpty()
+                || this.coordinates.validate() ) {
+            return false;
+        }
+        if (this.event==null){
+            return true;
+        }
+        return this.event.validate();
+    }
+
+    @Override
+    public String toString() {
+        return "Ticket{" + "id=" + id + ", name='" + name + '\'' + ", creationDate=" + creationDate + ", price=" + price + ", discount=" + discount + ", refundable=" + refundable + ", coordinates=" + coordinates + ", type=" + type + ", event=" + event + '}';
+    }
+
     public static class Builder {
         private String name = null;
         private Integer price = null;
         private float discount = 0;
         private Boolean refundable = null;
-        private Coordinates coordinates = null;
+        private Coordinates coordinates = new Coordinates();
         private TicketType type = null;
-        private Event event = null;
-
+        private Event event = new Event();
 
 
         public Builder name(String name) {
@@ -88,60 +117,13 @@ public class Ticket implements Validatable {
         public Ticket build() {
             Ticket ticket = new Ticket();
             ticket.name = this.name;
-
             ticket.price = this.price;
             ticket.discount = this.discount;
             ticket.refundable = this.refundable;
             ticket.coordinates = this.coordinates;
             ticket.type = this.type;
             ticket.event = this.event;
-
             return ticket;
         }
-    }
-
-    @Override
-    public boolean validate() {
-        if (id <= 0) {
-            return false;
-        }
-
-        if (creationDate == null) {
-            return false;
-        }
-        if (price != null) {
-            if (price <= 0) {
-                return false;
-            }
-        }
-        if (discount <= 0) {
-            return false;
-        }
-        if (coordinates == null) {
-            return false;
-        }
-        if (name == null) {
-            return false;
-        }
-        if (name.isEmpty()) {
-            return false;
-        }
-
-        return this.coordinates.validate();
-    }
-
-    @Override
-    public String toString() {
-        return "Ticket{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", creationDate=" + creationDate +
-                ", price=" + price +
-                ", discount=" + discount +
-                ", refundable=" + refundable +
-                ", coordinates=" + coordinates +
-                ", type=" + type +
-                ", event=" + event +
-                '}';
     }
 }

@@ -1,10 +1,9 @@
 package org.example.commands;
 
 import org.example.exeptions.InvalidArgumentsException;
-import org.example.exeptions.WrongIdInputException;
+import org.example.managers.CollectionManager;
 import org.example.models.Ticket;
 import org.example.models.creators.TicketCreator;
-import org.example.managers.CollectionManager;
 
 import java.util.Map;
 
@@ -14,21 +13,9 @@ public class UpdateId extends Command implements Executable {
         super(wordsCount, collectionManager);
     }
 
-    public UpdateId(CollectionManager collectionManager) {
-        super(collectionManager);
-    }
-
-    public UpdateId(int wordsCount) {
-        super(wordsCount);
-    }
-
-    public UpdateId() {
-    }
-
     @Override
     public void execute(String[] splitedConsoleRead) {
-
-        int id=0;
+        int id = 0;
         this.validateCommand(splitedConsoleRead);
         try {
             id = Integer.valueOf(splitedConsoleRead[1]);
@@ -38,9 +25,8 @@ public class UpdateId extends Command implements Executable {
 
         Map<String, Ticket> collection = this.collectionManager.getCollection();
         for (String key : collection.keySet()) {
-            if (collection.get(key).getId()==id) {
-                collection.replace(key,TicketCreator.createTicket("Создание билета для замены по id"));
-
+            if (collection.get(key).getId() == id) {
+                collection.replace(key, TicketCreator.createTicket("Создание билета для замены по id"));
             }
         }
     }
@@ -52,8 +38,6 @@ public class UpdateId extends Command implements Executable {
             throw new InvalidArgumentsException("Команда update состоит из команды и ключа .");
         }
     }
-
-
 
 
     @Override

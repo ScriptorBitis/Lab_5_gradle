@@ -1,6 +1,5 @@
 package org.example.models;
 
-import java.lang.Double;
 import org.example.utility.Validatable;
 
 
@@ -16,9 +15,25 @@ public class Coordinates implements Validatable {
         return x;
     }
 
+    @Override
+    public boolean validate() {
+        if (y == null) {
+            return false;
+        }
+        return 484 <= y;
+    }
+
+    @Override
+    public String toString() {
+        return "Coordinates{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
+    }
+
     public static class Builder {
-        private double x=0;
-        private Double y=null;
+        private double x = 0;
+        private Double y = null;
 
         public Builder x(int x) {
             this.x = x;
@@ -32,31 +47,12 @@ public class Coordinates implements Validatable {
 
 
         public Coordinates build() {
-            Coordinates coordinates=new Coordinates();
-            coordinates.y=this.y;
-            coordinates.x=this.x;
+            Coordinates coordinates = new Coordinates();
+            coordinates.y = this.y;
+            coordinates.x = this.x;
 
             return coordinates;
         }
 
-    }
-
-    @Override
-    public boolean validate() {
-        if (y == null) {
-            return false;
-        }
-        if (y > 484) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "Coordinates{" +
-                "x=" + x +
-                ", y=" + y +
-                '}';
     }
 }

@@ -1,9 +1,9 @@
 package org.example.models.creators;
 
 
+import org.example.exeptions.WrongFieldValueException;
 import org.example.models.Ticket;
 import org.example.models.TicketType;
-import org.example.exeptions.WrongFieldValueException;
 import org.example.utility.console.Console;
 import org.example.utility.console.StandartConsole;
 
@@ -11,8 +11,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class TicketCreator extends Creator {
-    private static Console console = new StandartConsole(new Scanner(System.in));
+public class TicketCreator {
+    private static final Console console = new StandartConsole(new Scanner(System.in));
 
     public static Ticket createTicket(String message) throws WrongFieldValueException {
 
@@ -31,7 +31,7 @@ public class TicketCreator extends Creator {
 
     private static String askName() {
         String name = null;
-        while (name == null || name.equals("")) {
+        while (name == null || name.isBlank()) {
             name = console.getUserInputString("Введите значение для параметра 'name'.Оно не может быть пустым\n->");
         }
         return name;
@@ -43,7 +43,7 @@ public class TicketCreator extends Creator {
         while (correctField) {
             try {
                 price = console.getUserInputIntMayBeNull("Введите значение для параметра 'price'.Ввод пустой строки будет засчитан за отсутствие параметра.\nВас предупредили\n->");
-                if (price==null){
+                if (price == null) {
                     return price;
                 }
                 if (price <= 0) {
@@ -62,12 +62,12 @@ public class TicketCreator extends Creator {
         boolean correctField = true;
         while (correctField) {
             try {
-                discount=console.getUserInputFloat("Введите значение для параметра 'скидка' > 0 и <= 100\nПример ввода: 15.5\n->");
+                discount = console.getUserInputFloat("Введите значение для параметра 'скидка' > 0 и <= 100\nПример ввода: 15.5\n->");
                 if (discount <= 0 || discount > 100) {
                     throw new WrongFieldValueException("Введено неправильное значения параметра 'скидка");
                 }
                 correctField = false;
-            } catch ( WrongFieldValueException exception) {
+            } catch (WrongFieldValueException exception) {
                 System.out.println(exception.getMessage());
             }
         }

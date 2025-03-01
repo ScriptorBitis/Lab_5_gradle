@@ -1,15 +1,15 @@
 package org.example.models.creators;
 
-import org.example.models.Event;
 import org.example.exeptions.WrongFieldValueException;
+import org.example.models.Event;
 import org.example.utility.console.Console;
 import org.example.utility.console.StandartConsole;
 
 import java.util.Scanner;
 
-public class EventCreator extends Creator {
+public class EventCreator {
 
-    private static Console console = new StandartConsole(new Scanner(System.in));
+    private static final Console console = new StandartConsole(new Scanner(System.in));
 
     public static Event createEvent() throws WrongFieldValueException {
         Event event = null;
@@ -36,7 +36,7 @@ public class EventCreator extends Creator {
 
     private static String askName() {
         String name = null;
-        while (name == null || name.equals("")) {
+        while (name == null || name.isBlank()) {
             name = console.getUserInputString("Введите значение для параметра 'name'.Оно не может быть пустым\n->");
         }
         return name;
@@ -53,7 +53,7 @@ public class EventCreator extends Creator {
                     throw new WrongFieldValueException("Количество билетов отрицательное");
                 }
                 correctField = false;
-            } catch ( WrongFieldValueException exception) {
+            } catch (WrongFieldValueException exception) {
                 System.out.println(exception.getMessage());
             }
         }

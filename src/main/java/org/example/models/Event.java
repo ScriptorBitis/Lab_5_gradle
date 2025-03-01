@@ -11,14 +11,36 @@ public class Event implements Validatable {
     public Event() {
     }
 
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public boolean validate() {
+        if (id <= 0
+                || ticketsCount <= 0
+                || name == null
+                || name.isBlank()) {
+            return false;
+        }
+        return true;
+
+    }
+
+    @Override
+    public String toString() {
+        return "Event{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", ticketsCount=" + ticketsCount +
+                ", description=" + description +
+                '}';
+    }
+
     public static class Builder {
         private String name = null;
         private int ticketsCount = 0;
         private String description = null;
-
-        public int getTicketsCount() {
-            return ticketsCount;
-        }
 
         public Builder name(String name) {
             this.name = name;
@@ -40,45 +62,13 @@ public class Event implements Validatable {
             event.name = this.name;
             event.ticketsCount = this.ticketsCount;
             event.description = this.description;
-            event.id = this.hashCode();
+            event.id = IdGenerator.assigntEventIdCounter();
 
             return event;
 
         }
 
 
-    }
-
-
-    @Override
-    public boolean validate() {
-        if (id <= 0) {
-            return false;
-        }
-
-        if (ticketsCount <= 0) {
-            return false;
-        }
-        if (description == null) {
-            return false;
-        }
-        if (name == null) {
-            return false;
-        }
-        if (name.isEmpty()) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "Event{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", ticketsCount=" + ticketsCount +
-                ", description=" + description +
-                '}';
     }
 
 

@@ -12,33 +12,19 @@ public class RemoveGreater extends Command implements Executable {
         super(wordsCount, collectionManager);
     }
 
-    public RemoveGreater(int wordsCount) {
-        super(wordsCount);
-    }
-
-    public RemoveGreater(CollectionManager collectionManager) {
-        super(collectionManager);
-    }
-
-    public RemoveGreater() {
-    }
-
     @Override
     public void execute(String[] splitedConsoleRead) {
         Ticket ticket = TicketCreator.createTicket("Инициализировано создание билета для поиска и удаления билетов, цена которых больше");
-
-        List<String> keyList=new ArrayList<>();
-
+        List<String> keyList = new ArrayList<>();
         for (String key : getCollectionManager().getCollection().keySet()) {
             Ticket ticketFromCollection = getCollectionManager().getCollection().get(key);
-            if (ticketFromCollection.getPrice()>ticket.getPrice()){
+            if (ticketFromCollection.getPrice() > ticket.getPrice()) {
                 keyList.add(key);
             }
         }
-
-        for(String key: keyList){
+        for (String key : keyList) {
             getCollectionManager().getCollection().remove(key);
-            System.out.println("Удален билет по ключу "+key);
+            System.out.println("Удален билет по ключу " + key);
         }
     }
 

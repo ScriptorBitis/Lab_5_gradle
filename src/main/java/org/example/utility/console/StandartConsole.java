@@ -1,10 +1,11 @@
 package org.example.utility.console;
 
+import org.example.exeptions.InterraptЕxitException;
+
 import java.util.Scanner;
-import org.example.exeptions.ЕmergencyЕxitException;
 
 public class StandartConsole implements Console {
-    private Scanner scanner;
+    private final Scanner scanner;
 
     public StandartConsole(Scanner scanner) {
         this.scanner = scanner;
@@ -13,20 +14,19 @@ public class StandartConsole implements Console {
     @Override
     public String getUserInputString(String message) {
         System.out.print(message);
-        String userInput = getUserInputCheckExit();
-        return userInput;
+        return getUserInputCheckExit();
     }
 
     @Override
     public int getUserInputInt(String message) {
-        int integer=0;
-        boolean intInput=true;
-        while (intInput){
+        int integer = 0;
+        boolean intInput = true;
+        while (intInput) {
             try {
                 System.out.print(message);
-                integer=Integer.valueOf(getUserInputCheckExit());
-                intInput=false;
-            }catch (NumberFormatException exception){
+                integer = Integer.valueOf(getUserInputCheckExit());
+                intInput = false;
+            } catch (NumberFormatException exception) {
                 System.out.println("Ошибка ввода. Попробуйте снова.");
             }
         }
@@ -35,18 +35,18 @@ public class StandartConsole implements Console {
 
     @Override
     public Integer getUserInputIntMayBeNull(String message) {
-        Integer integer=null;
-        boolean intInput=true;
-        while (intInput){
+        Integer integer = null;
+        boolean intInput = true;
+        while (intInput) {
             try {
                 System.out.print(message);
-                String userInput=getUserInputCheckExit();
-                if (userInput.isEmpty()){
+                String userInput = getUserInputCheckExit();
+                if (userInput.isEmpty()) {
                     return null;
                 }
-                integer=Integer.valueOf(userInput);
-                intInput=false;
-            }catch (NumberFormatException exception){
+                integer = Integer.valueOf(userInput);
+                intInput = false;
+            } catch (NumberFormatException exception) {
                 System.out.println("Ошибка ввода. Попробуйте снова.");
             }
         }
@@ -55,14 +55,14 @@ public class StandartConsole implements Console {
 
     @Override
     public double getUserInputDouble(String message) {
-        double integer=0;
-        boolean doubleInput=true;
-        while (doubleInput){
+        double integer = 0;
+        boolean doubleInput = true;
+        while (doubleInput) {
             try {
                 System.out.print(message);
-                integer=Double.valueOf(getUserInputCheckExit());
-                doubleInput=false;
-            }catch (NumberFormatException exception){
+                integer = Double.valueOf(getUserInputCheckExit());
+                doubleInput = false;
+            } catch (NumberFormatException exception) {
                 System.out.println("Ошибка ввода. Попробуйте снова.");
             }
         }
@@ -71,24 +71,24 @@ public class StandartConsole implements Console {
 
     @Override
     public float getUserInputFloat(String message) {
-        float integer=0;
-        boolean doubleInput=true;
-        while (doubleInput){
+        float integer = 0;
+        boolean doubleInput = true;
+        while (doubleInput) {
             try {
                 System.out.print(message);
-                integer=Float.valueOf(getUserInputCheckExit());
-                doubleInput=false;
-            }catch (NumberFormatException exception){
+                integer = Float.valueOf(getUserInputCheckExit());
+                doubleInput = false;
+            } catch (NumberFormatException exception) {
                 System.out.println("Ошибка ввода. Попробуйте снова.");
             }
         }
         return integer;
     }
 
-    private String getUserInputCheckExit(){
-        String input=scanner.nextLine().trim();
-        if(input.equals("exit")){
-            throw new ЕmergencyЕxitException("Выход из приложения");
+    private String getUserInputCheckExit() {
+        String input = scanner.nextLine().trim();
+        if (input.equals("exit")) {
+            throw new InterraptЕxitException("Выход из приложения");
         }
         return input;
 

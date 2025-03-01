@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 public class ExecuteScript extends Command implements Executable {
 
-    private HashSet<String> executedFiles= new HashSet<>();
+    private final HashSet<String> executedFiles = new HashSet<>();
     private boolean firstCommand;
 
     public ExecuteScript(int wordsCount, CollectionManager collectionManager, Engine engine) {
@@ -23,17 +23,14 @@ public class ExecuteScript extends Command implements Executable {
 
     @Override
     public void execute(String[] splitedConsoleRead) {
-
         validateCommand(splitedConsoleRead);
         File file = new File(System.getenv(splitedConsoleRead[1]));
         file.setReadable(true);
-
-        firstCommand=false;
+        firstCommand = false;
         if (executedFiles.contains(splitedConsoleRead[1]) & !firstCommand) {
             throw new ScriptRecursionException("Запущена защита от рекурскии : файл не должен вызывать сам себя");
         }
         executedFiles.add(splitedConsoleRead[1]);
-
         try {
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
@@ -43,23 +40,22 @@ public class ExecuteScript extends Command implements Executable {
                 this.engine.getCommandManager().setUserRequest(scriptLine);
             }
         } catch (FileNotFoundException e) {
-                reportMissingFile();
+            reportMissingFile();
         }
-
-        firstCommand=true;
+        firstCommand = true;
         executedFiles.clear();
     }
 
     @Override
-    public void validateCommand(String[] splitedConsoleRead) throws InvalidArgumentsException,NoSuchEnvironmentVariablesException,IllegalArgumentException {
-        if (splitedConsoleRead.length!=this.wordsCount){
+    public void validateCommand(String[] splitedConsoleRead) throws InvalidArgumentsException, NoSuchEnvironmentVariablesException, IllegalArgumentException {
+        if (splitedConsoleRead.length != this.wordsCount) {
             throw new IllegalArgumentException("У команды execute_script file_name 2 аргумента.");
         }
-        if (System.getenv(splitedConsoleRead[1])==null){
+        if (System.getenv(splitedConsoleRead[1]) == null) {
             throw new NoSuchEnvironmentVariablesException("Введена неправильная переменная окружения!");
         }
         File file = new File(splitedConsoleRead[1]);
-        if (!file.exists()){
+        if (!file.exists()) {
             throw new IllegalArgumentException("Файла не существует!");
         }
     }

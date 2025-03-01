@@ -2,10 +2,12 @@ package org.example.utility;
 
 
 import org.example.commands.*;
-import org.example.exeptions.*;
+import org.example.exeptions.InterraptЕxitException;
 import org.example.managers.CollectionManager;
 import org.example.managers.CommandManager;
-import org.example.models.*;
+import org.example.models.IdGenerator;
+import org.example.models.Ticket;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +18,7 @@ import static org.example.managers.DumpManager.fillUpCollection;
 
 public class Engine {
     private boolean flag = true;
-    private Scanner consoleRead = new Scanner(System.in);
+    private final Scanner consoleRead = new Scanner(System.in);
     private CollectionManager collectionManager;
     private CommandManager commandManager;
 
@@ -26,8 +28,8 @@ public class Engine {
 
     public void runProgramm() {
 
-        this.collectionManager = new CollectionManager(new HashMap<String, Ticket>());
-        this.commandManager = new CommandManager(new HashMap<String, Executable>());
+        this.collectionManager = new CollectionManager(new HashMap<>());
+        this.commandManager = new CommandManager(new HashMap<>());
 
         commandManager.setUpCommand(new Help(1, collectionManager, this));
         commandManager.setUpCommand(new Exit(1, collectionManager, this));
@@ -46,25 +48,24 @@ public class Engine {
         commandManager.setUpCommand(new Save(1, collectionManager));
         commandManager.setUpCommand(new ExecuteScript(2, collectionManager, this));
 
-
         try {
             Map<String, Ticket> tickets = fillUpCollection();
             collectionManager.setCollection(tickets);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
-
         }
 
+        IdGenerator.restoreTicketIdCounter(this.collectionManager.getCollection());
+        IdGenerator.restoreEventIdCounter(this.collectionManager.getCollection());
+
         while (flag) {
-
-
             try {
                 commandManager.setUserRequest(consoleRead.nextLine().trim().split(" "));
             } catch (NoSuchElementException e) {
                 System.out.println("Ярослав Вадимович, не надо никаких ctrl+d, пожалуйста\nЯ закрою прогу, ибо не надо всякую фигню забивать в консоль");
                 return;
-            } catch (ЕmergencyЕxitException e) {
+            } catch (InterraptЕxitException e) {
                 this.finishProgramm();
                 System.out.println(e.getMessage());
             } catch (Exception e) {

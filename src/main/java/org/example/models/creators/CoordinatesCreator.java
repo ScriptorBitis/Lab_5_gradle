@@ -1,14 +1,14 @@
 package org.example.models.creators;
 
-import org.example.models.Coordinates;
 import org.example.exeptions.WrongFieldValueException;
+import org.example.models.Coordinates;
 import org.example.utility.console.Console;
 import org.example.utility.console.StandartConsole;
 
 import java.util.Scanner;
 
-public class CoordinatesCreator extends Creator {
-    private static Console console=new StandartConsole(new Scanner(System.in));
+public class CoordinatesCreator {
+    private static final Console console = new StandartConsole(new Scanner(System.in));
 
     public static Coordinates createCoordinates() throws WrongFieldValueException {
         Coordinates.Builder builder = new Coordinates.Builder();
@@ -20,7 +20,7 @@ public class CoordinatesCreator extends Creator {
     }
 
     private static int askX() {
-        int x ;
+        int x;
         x = console.getUserInputInt("Введите координату x\n->");
         return x;
     }
@@ -29,14 +29,14 @@ public class CoordinatesCreator extends Creator {
     private static Double askY() {
         Double y = 0.0;
         boolean correctField = true;
-        while (correctField){
+        while (correctField) {
             try {
                 y = console.getUserInputDouble("Введите координату y. Учтите, что значение Y не может быть больше 484\n->");
                 if (y > 484) {
                     throw new WrongFieldValueException("y превышает максимальное значение");
                 }
                 correctField = false;
-            } catch ( WrongFieldValueException exception) {
+            } catch (WrongFieldValueException exception) {
                 System.out.println(exception.getMessage());
             }
         }

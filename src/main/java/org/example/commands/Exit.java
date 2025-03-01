@@ -5,7 +5,7 @@ import org.example.managers.CollectionManager;
 import org.example.utility.Engine;
 
 
-public class Exit extends Command implements Executable{
+public class Exit extends Command implements Executable {
 
     public Exit(int wordsCount, CollectionManager collectionManager, Engine engine) {
         super(wordsCount, collectionManager, engine);
