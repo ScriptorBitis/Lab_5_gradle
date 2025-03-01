@@ -1,26 +1,23 @@
 package org.example.models;
 
-import java.util.List;
 import java.util.Map;
 
 public class IdGenerator {
-    static private Integer TicketIdCounter=0;
-    static private Integer EventIdCounter=0;
-
-
+    private static Integer TicketIdCounter = 0;
+    private static Integer EventIdCounter = 0;
 
     private static void setTicketIdCounter(Integer idCounter) {
         TicketIdCounter = idCounter;
     }
 
     public static void restoreTicketIdCounter(Map<String, Ticket> ticketMap) {
-        if (ticketMap.isEmpty()){
+        if (ticketMap.isEmpty()) {
             setTicketIdCounter(0);
             return;
         }
 
-        for (Ticket ticket: ticketMap.values()){
-            if (ticket.getId()> TicketIdCounter){
+        for (Ticket ticket : ticketMap.values()) {
+            if (ticket.getId() > TicketIdCounter) {
                 setTicketIdCounter(ticket.getId());
             }
         }
@@ -36,16 +33,16 @@ public class IdGenerator {
     }
 
     public static void restoreEventIdCounter(Map<String, Ticket> ticketMap) {
-        if (ticketMap.isEmpty()){
+        if (ticketMap.isEmpty()) {
             setEventIdCounter(0);
             return;
         }
 
-        for (Ticket ticket: ticketMap.values()){
-            if (ticket.getEvent()==null){
+        for (Ticket ticket : ticketMap.values()) {
+            if (ticket.getEvent() == null) {
                 continue;
             }
-            if (ticket.getEvent().getId()> EventIdCounter){
+            if (ticket.getEvent().getId() > EventIdCounter) {
                 setEventIdCounter(ticket.getEvent().getId());
             }
         }
