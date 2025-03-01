@@ -15,7 +15,7 @@ dependencies {
 
 tasks.shadowJar {
     manifest {
-        attributes["Main-Class"] = "org.example.utility.Main"
+        attributes["Main-Class"] = "org.example.Main"
     }
     archiveClassifier.set("all")
 }

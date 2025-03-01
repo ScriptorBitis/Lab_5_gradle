@@ -1,3 +1,5 @@
+package org.example;
+
 import org.example.utility.Engine;
 
 public class Main {
