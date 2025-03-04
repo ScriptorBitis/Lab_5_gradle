@@ -3,6 +3,7 @@ package org.example.commands;
 import org.example.exeptions.InvalidArgumentsException;
 import org.example.exeptions.NoSuchEnvironmentVariablesException;
 import org.example.exeptions.ScriptRecursionException;
+import org.example.managers.CollectionManager;
 import org.example.utility.Engine;
 
 import java.io.File;
@@ -18,7 +19,7 @@ public class ExecuteScript extends Command implements Executable {
 
     public ExecuteScript(int wordsCount, Engine engine) {
         super(wordsCount);
-        this.engine=engine;
+        this.engine = engine;
     }
 
     @Override
@@ -31,12 +32,10 @@ public class ExecuteScript extends Command implements Executable {
             throw new ScriptRecursionException("Запущена защита от рекурскии : файл не должен вызывать сам себя");
         }
         executedFiles.add(splitedConsoleRead[1]);
-        try {
-            Scanner scanner = new Scanner(file);
+        try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine()) {
                 String[] scriptLine = scanner.nextLine().trim().split(" ");
                 System.out.println("\nВыполняется строка " + Arrays.toString(scriptLine));
-
                 this.engine.getCommandManager().setUserRequest(scriptLine);
             }
         } catch (FileNotFoundException e) {

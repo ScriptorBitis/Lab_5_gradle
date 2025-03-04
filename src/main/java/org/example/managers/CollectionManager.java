@@ -1,6 +1,7 @@
 package org.example.managers;
 
 import org.example.models.Ticket;
+import org.example.models.creators.TicketCreator;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -15,13 +16,23 @@ public class CollectionManager {
         this.initializationDate = LocalDateTime.now().withNano(0);
     }
 
-    public static Map<String, Ticket> sortByPrice(Map<String, Ticket> COLLECTION) {
-        List<Ticket> ticketByPrice = new ArrayList<>(COLLECTION.values());
+    public Map<String, Ticket> sortByPrice() {
+        List<Ticket> ticketByPrice = new ArrayList<>(this.collection.values());
         Collections.sort(ticketByPrice, Comparator.comparing(Ticket::getPrice));
         for (Ticket ticket : ticketByPrice) {
             System.out.println(ticket.toString());
         }
         return Map.of();
+    }
+
+    public String findKeyById(int id) {
+        for (String key : this.collection.keySet()) {
+            if (this.collection.get(key).getId() == id) {
+                return key;
+            }
+        }
+        System.out.println("Объекта с id = " + id + " не существует!");
+        return null;
     }
 
     public Map<String, Ticket> getCollection() {

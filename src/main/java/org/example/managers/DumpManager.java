@@ -27,16 +27,13 @@ public class DumpManager {
     static public Map<String, Ticket> fillUpCollection() throws NoSuchEnvironmentVariablesException, NotAFileException, InvalidArgumentsException {
         Type type = new TypeToken<HashMap<String, Ticket>>() {
         }.getType();
-
         checkEnvironmentVariable("lab_data");
-
         File file = new File(System.getenv("lab_data"));
         file.setReadable(true);
         HashMap<String, Ticket> tickets;
         try (FileReader fileReader = new FileReader(file)) {
             tickets = gson.fromJson(fileReader, type);
             System.out.println("Файл прочитан успешно!");
-
         } catch (Exception e) {
             wrongEnvironmentVariables = false;
             System.out.println("Коллекцию считать не удалось!Файл поврежден, отсутствует или пуст!");
@@ -44,7 +41,6 @@ public class DumpManager {
         }
         for (Validatable obj : tickets.values()) {
             if (obj.validate()==false) {
-                System.out.println(obj.toString());
                 System.out.println("Объекты записанной коллекции содержат неправильные значение.");
                 return new HashMap<>();
             }

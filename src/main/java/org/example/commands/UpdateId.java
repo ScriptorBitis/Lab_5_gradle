@@ -5,6 +5,7 @@ import org.example.models.Ticket;
 import org.example.models.creators.TicketCreator;
 import org.example.utility.Engine;
 
+import java.security.Key;
 import java.util.Map;
 
 public class UpdateId extends Command implements Executable {
@@ -13,7 +14,7 @@ public class UpdateId extends Command implements Executable {
 
     public UpdateId(int wordsCount, Engine engine) {
         super(wordsCount);
-        this.engine=engine;
+        this.engine = engine;
     }
 
     @Override
@@ -27,11 +28,11 @@ public class UpdateId extends Command implements Executable {
         }
 
         Map<String, Ticket> collection = this.engine.getCollectionManager().getCollection();
-        for (String key : collection.keySet()) {
-            if (collection.get(key).getId() == id) {
-                collection.replace(key, TicketCreator.createTicket("Создание билета для замены по id"));
-            }
+        String key = this.engine.getCollectionManager().findKeyById(id);
+        if (key==null){
+            return;
         }
+        collection.replace(key, TicketCreator.createTicket("Создание билета для замены по id"));
     }
 
 
