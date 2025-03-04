@@ -1,13 +1,17 @@
 package org.example.commands;
 
-import org.example.managers.CollectionManager;
 import org.example.managers.DumpManager;
+import org.example.utility.Engine;
 
 import java.io.IOException;
 
 public class Save extends Command implements Executable {
-    public Save(int wordsCount, CollectionManager collectionManager) {
-        super(wordsCount, collectionManager);
+
+    private Engine engine;
+
+    public Save(int wordsCount,Engine engine) {
+        super(wordsCount);
+        this.engine=engine;
     }
 
     @Override
@@ -18,7 +22,7 @@ public class Save extends Command implements Executable {
     @Override
     public void execute(String[] splitedConsoleRead) {
         try {
-            DumpManager.writeCollection(collectionManager);
+            DumpManager.writeCollection(this.engine.getCollectionManager());
             System.out.println("Коллекция записана в файл!");
         } catch (IOException e) {
             System.out.println(e.getMessage());

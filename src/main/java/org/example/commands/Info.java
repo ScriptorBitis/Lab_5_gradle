@@ -1,21 +1,22 @@
 package org.example.commands;
 
-
-import org.example.managers.CollectionManager;
+import org.example.utility.Engine;
 
 public class Info extends Command implements Executable {
+    private Engine engine;
 
-    public Info(int wordsCount, CollectionManager collectionManager) {
-        super(wordsCount, collectionManager);
+    public Info(int wordsCount, Engine engine) {
+        super(wordsCount);
+        this.engine=engine;
     }
 
     @Override
     public void execute(String[] splitedConsoleRead) {
         System.out.println("Информация о коллекции:\n" +
-                "Количество элементов : " + this.collectionManager.getCollection().size() + "\n" +
-                "Тип : " + this.collectionManager.getCollection().getClass().getSimpleName() + "\n" +
-                "Время инициализации : " + this.collectionManager.getInitializationDate() + "\n" +
-                "Набор доступных ключей : " + this.collectionManager.getCollection().keySet()
+                "Количество элементов : " + this.engine.getCollectionManager().getCollection().size() + "\n" +
+                "Тип : " +this.engine.getCollectionManager().getCollection().getClass().getSimpleName() + "\n" +
+                "Время инициализации : " + this.engine.getCollectionManager().getInitializationDate() + "\n" +
+                "Набор доступных ключей : " + this.engine.getCollectionManager().getCollection().keySet()
         );
     }
 

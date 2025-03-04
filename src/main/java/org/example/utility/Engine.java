@@ -31,22 +31,22 @@ public class Engine {
         this.collectionManager = new CollectionManager(new HashMap<>());
         this.commandManager = new CommandManager(new HashMap<>());
 
-        commandManager.setUpCommand(new Help(1, collectionManager, this));
-        commandManager.setUpCommand(new Exit(1, collectionManager, this));
-        commandManager.setUpCommand(new Insert(2, collectionManager));
-        commandManager.setUpCommand(new Show(1, collectionManager));
-        commandManager.setUpCommand(new Clear(1, collectionManager));
-        commandManager.setUpCommand(new Info(1, collectionManager));
-        commandManager.setUpCommand(new RemoveKey(2, collectionManager));
-        commandManager.setUpCommand(new UpdateId(2, collectionManager));
-        commandManager.setUpCommand(new PrintAscending(1, collectionManager));
-        commandManager.setUpCommand(new MaxByCoordinates(1, collectionManager));
-        commandManager.setUpCommand(new ReplaceIfLowe(1, collectionManager));
-        commandManager.setUpCommand(new RemoveAnyByType(2, collectionManager));
-        commandManager.setUpCommand(new RemoveGreater(1, collectionManager));
-        commandManager.setUpCommand(new RemoveLower(1, collectionManager));
-        commandManager.setUpCommand(new Save(1, collectionManager));
-        commandManager.setUpCommand(new ExecuteScript(2, collectionManager, this));
+        commandManager.setUpCommand(new Help(1,this));
+        commandManager.setUpCommand(new Exit(1, this));
+        commandManager.setUpCommand(new Insert(2, this));
+        commandManager.setUpCommand(new Show(1, this));
+        commandManager.setUpCommand(new Clear(1, this));
+        commandManager.setUpCommand(new Info(1, this));
+        commandManager.setUpCommand(new RemoveKey(2, this));
+        commandManager.setUpCommand(new UpdateId(2, this));
+        commandManager.setUpCommand(new PrintAscending(1, this));
+        commandManager.setUpCommand(new MaxByCoordinates(1, this));
+        commandManager.setUpCommand(new ReplaceIfLowe(1, this));
+        commandManager.setUpCommand(new RemoveAnyByType(2, this));
+        commandManager.setUpCommand(new RemoveGreater(1, this));
+        commandManager.setUpCommand(new RemoveLower(1, this));
+        commandManager.setUpCommand(new Save(1, this));
+        commandManager.setUpCommand(new ExecuteScript(2, this));
 
         try {
             Map<String, Ticket> tickets = fillUpCollection();

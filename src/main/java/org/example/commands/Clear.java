@@ -1,23 +1,24 @@
 package org.example.commands;
 
-import org.example.managers.CollectionManager;
-
+import org.example.utility.Engine;
 
 public class Clear extends Command implements Executable {
 
-    public Clear(int wordsCount, CollectionManager collectionManager) {
-        super(wordsCount, collectionManager);
+    private Engine engine;
+
+    public Clear(int wordsCount, Engine engine) {
+        super(wordsCount);
+        this.engine=engine;
     }
 
     @Override
     public void execute(String[] splitedConsoleRead) {
-        if (this.collectionManager.getCollection().isEmpty()) {
+        if (this.engine.getCollectionManager().getCollection().isEmpty()) {
             System.out.println("Коллекция пуста!");
-        } else {
-            this.collectionManager.getCollection().clear();
-            System.out.println("Коллекция успешно очищена!");
+            return;
         }
-
+        this.engine.getCollectionManager().getCollection().clear();
+        System.out.println("Коллекция успешно очищена!");
     }
 
     @Override

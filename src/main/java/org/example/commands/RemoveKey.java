@@ -2,18 +2,22 @@ package org.example.commands;
 
 import org.example.exeptions.InvalidArgumentsException;
 import org.example.managers.CollectionManager;
+import org.example.utility.Engine;
 
 public class RemoveKey extends Command implements Executable {
 
-    public RemoveKey(int wordsCount, CollectionManager collectionManager) {
-        super(wordsCount, collectionManager);
+    private Engine engine;
+
+    public RemoveKey(int wordsCount, Engine engine) {
+        super(wordsCount);
+        this.engine=engine;
     }
 
     @Override
     public void execute(String[] splitedConsoleRead) {
         validateCommand(splitedConsoleRead);
-        if (this.collectionManager.getCollection().containsKey(splitedConsoleRead[1])) {
-            this.collectionManager.getCollection().remove(splitedConsoleRead[1]);
+        if (this.engine.getCollectionManager().getCollection().containsKey(splitedConsoleRead[1])) {
+            this.engine.getCollectionManager().getCollection().remove(splitedConsoleRead[1]);
             System.out.println("Элемент удален!");
         } else {
             System.out.println("Такого ключа нет! Можете ознакомиться с доступными ключами, введя info");

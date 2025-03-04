@@ -1,19 +1,21 @@
 package org.example.commands;
 
-import org.example.managers.CollectionManager;
 import org.example.models.Ticket;
-
+import org.example.utility.Engine;
 import java.util.*;
 
 public class PrintAscending extends Command implements Executable {
 
-    public PrintAscending(int wordsCount, CollectionManager collectionManager) {
-        super(wordsCount, collectionManager);
+    private Engine engine;
+
+    public PrintAscending(int wordsCount, Engine engine) {
+        super(wordsCount);
+        this.engine=engine;
     }
 
     @Override
     public void execute(String[] splitedConsoleRead) {
-        Map<String, Ticket> COLLECTION = this.collectionManager.getCollection();
+        Map<String, Ticket> COLLECTION = this.engine.getCollectionManager().getCollection();
         List<Ticket> ticketByPrice = new ArrayList<>(COLLECTION.values());
         Collections.sort(ticketByPrice, Comparator.comparing(Ticket::getPrice));
         for (Ticket ticket : ticketByPrice) {

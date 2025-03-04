@@ -1,16 +1,19 @@
 package org.example.commands;
 
 import org.example.exeptions.InvalidArgumentsException;
-import org.example.managers.CollectionManager;
 import org.example.models.Ticket;
 import org.example.models.creators.TicketCreator;
+import org.example.utility.Engine;
 
 import java.util.Map;
 
 public class UpdateId extends Command implements Executable {
 
-    public UpdateId(int wordsCount, CollectionManager collectionManager) {
-        super(wordsCount, collectionManager);
+    private Engine engine;
+
+    public UpdateId(int wordsCount, Engine engine) {
+        super(wordsCount);
+        this.engine=engine;
     }
 
     @Override
@@ -23,7 +26,7 @@ public class UpdateId extends Command implements Executable {
             System.out.println("id введен неверно.id - число");
         }
 
-        Map<String, Ticket> collection = this.collectionManager.getCollection();
+        Map<String, Ticket> collection = this.engine.getCollectionManager().getCollection();
         for (String key : collection.keySet()) {
             if (collection.get(key).getId() == id) {
                 collection.replace(key, TicketCreator.createTicket("Создание билета для замены по id"));

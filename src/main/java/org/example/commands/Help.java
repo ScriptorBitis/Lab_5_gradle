@@ -1,19 +1,18 @@
 package org.example.commands;
 
-
-import org.example.managers.CollectionManager;
 import org.example.utility.Engine;
 
 public class Help extends Command implements Executable {
+    private Engine engine;
 
-
-    public Help(int wordsCount, CollectionManager collectionManager, Engine engine) {
-        super(wordsCount, collectionManager, engine);
+    public Help(int wordsCount,Engine engine) {
+        super(wordsCount);
+        this.engine=engine;
     }
 
     @Override
     public void execute(String[] splitedRequest) {
-        for (Executable executable : this.getEngine().getCommandManager().getCommands().values()) {
+        for (Executable executable : this.engine.getCommandManager().getCommands().values()) {
             executable.describe();
         }
     }

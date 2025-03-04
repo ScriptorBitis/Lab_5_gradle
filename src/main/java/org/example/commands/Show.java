@@ -1,21 +1,24 @@
 package org.example.commands;
 
-import org.example.managers.CollectionManager;
+import org.example.utility.Engine;
 
 public class Show extends Command implements Executable {
 
-    public Show(int wordsCount, CollectionManager collectionManager) {
-        super(wordsCount, collectionManager);
+    private Engine engine;
+
+    public Show(int wordsCount, Engine engine) {
+        super(wordsCount);
+        this.engine=engine;
     }
 
     @Override
     public void execute(String[] splitedConsoleRead) {
-        if (this.collectionManager.getCollection().isEmpty()) {
+        if (this.engine.getCollectionManager().getCollection().isEmpty()) {
             System.out.println("Коллекция пуста!");
             return;
         }
-        for (String key : this.collectionManager.getCollection().keySet()) {
-            System.out.println("Ключ : " + key + ". Элемент : " + this.collectionManager.getCollection().get(key));
+        for (String key : this.engine.getCollectionManager().getCollection().keySet()) {
+            System.out.println("Ключ : " + key + ". Элемент : " + this.engine.getCollectionManager().getCollection().get(key));
         }
     }
 

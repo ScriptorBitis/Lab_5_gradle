@@ -1,19 +1,19 @@
 package org.example.commands;
 
-
-import org.example.managers.CollectionManager;
 import org.example.utility.Engine;
 
-
 public class Exit extends Command implements Executable {
+    private Engine engine;
 
-    public Exit(int wordsCount, CollectionManager collectionManager, Engine engine) {
-        super(wordsCount, collectionManager, engine);
+    public Exit(int wordsCount ,Engine engine) {
+        super(wordsCount);
+        this.engine = engine;
+
     }
 
     @Override
     public void execute(String[] splitedRequest) {
-        engine.finishProgramm();
+        this.engine.finishProgramm();
     }
 
     @Override

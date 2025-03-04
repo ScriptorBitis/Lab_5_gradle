@@ -1,28 +1,27 @@
 package org.example.commands;
 
-import org.example.managers.CollectionManager;
 import org.example.models.Ticket;
 import org.example.models.creators.TicketCreator;
-import org.example.utility.console.Console;
-import org.example.utility.console.StandartConsole;
-
-import java.util.Scanner;
+import org.example.utility.Engine;
 
 public class ReplaceIfLowe extends Command implements Executable {
 
-    public ReplaceIfLowe(int wordsCount, CollectionManager collectionManager) {
-        super(wordsCount, collectionManager);
+    private Engine engine;
+
+    public ReplaceIfLowe(int wordsCount, Engine engine) {
+        super(wordsCount);
+        this.engine=engine;
     }
 
     @Override
     public void execute(String[] splitedConsoleRead) {
-        if (!collectionManager.getCollection().containsKey(splitedConsoleRead[1])) {
+        if (!this.engine.getCollectionManager().getCollection().containsKey(splitedConsoleRead[1])) {
             System.out.println("Такого ключа нет! Ознакомьтесь с доступными ключами, введя 'info'");
             return;
         }
         Ticket ticket = TicketCreator.createTicket("Создание билета для сравнения !цены! и возможной последующей замены");
-        if (collectionManager.getCollection().get(splitedConsoleRead[1]).getPrice() > ticket.getPrice()) {
-            collectionManager.getCollection().replace(splitedConsoleRead[1], ticket);
+        if (this.engine.getCollectionManager().getCollection().get(splitedConsoleRead[1]).getPrice() > ticket.getPrice()) {
+            this.engine.getCollectionManager().getCollection().replace(splitedConsoleRead[1], ticket);
             System.out.println("Билет заменен!");
             return;
         }

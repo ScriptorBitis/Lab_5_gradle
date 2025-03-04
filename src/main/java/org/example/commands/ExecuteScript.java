@@ -3,7 +3,6 @@ package org.example.commands;
 import org.example.exeptions.InvalidArgumentsException;
 import org.example.exeptions.NoSuchEnvironmentVariablesException;
 import org.example.exeptions.ScriptRecursionException;
-import org.example.managers.CollectionManager;
 import org.example.utility.Engine;
 
 import java.io.File;
@@ -13,12 +12,13 @@ import java.util.HashSet;
 import java.util.Scanner;
 
 public class ExecuteScript extends Command implements Executable {
-
+    private Engine engine;
     private final HashSet<String> executedFiles = new HashSet<>();
     private boolean firstCommand;
 
-    public ExecuteScript(int wordsCount, CollectionManager collectionManager, Engine engine) {
-        super(wordsCount, collectionManager, engine);
+    public ExecuteScript(int wordsCount, Engine engine) {
+        super(wordsCount);
+        this.engine=engine;
     }
 
     @Override

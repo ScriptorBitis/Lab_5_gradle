@@ -2,16 +2,20 @@ package org.example.commands;
 
 import org.example.exeptions.InvalidArgumentsException;
 import org.example.exeptions.NoSuchTypeException;
-import org.example.managers.CollectionManager;
 import org.example.models.Ticket;
 import org.example.models.TicketType;
+import org.example.utility.Engine;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class RemoveAnyByType extends Command implements Executable {
-    public RemoveAnyByType(int wordsCount, CollectionManager collectionManager) {
-        super(wordsCount, collectionManager);
+
+    private Engine engine;
+
+    public RemoveAnyByType(int wordsCount, Engine engine) {
+        super(wordsCount);
+        this.engine=engine;
     }
 
     @Override
@@ -27,11 +31,11 @@ public class RemoveAnyByType extends Command implements Executable {
         ticketsTypes.put("BUDGETARY", TicketType.BUDGETARY);
         ticketsTypes.put("CHEAP", TicketType.CHEAP);
         ticketType = ticketsTypes.get(type);
-        for (String key : getCollectionManager().getCollection().keySet()) {
-            Ticket ticket = getCollectionManager().getCollection().get(key);
+        for (String key : this.engine.getCollectionManager().getCollection().keySet()) {
+            Ticket ticket = this.engine.getCollectionManager().getCollection().get(key);
             if (ticket.getType().equals(ticketType)) {
-                System.out.println("Удаление объекта " + getCollectionManager().getCollection().get(key).toString());
-                getCollectionManager().getCollection().remove(key);
+                System.out.println("Удаление объекта " + this.engine.getCollectionManager().getCollection().get(key).toString());
+                this.engine.getCollectionManager().getCollection().remove(key);
                 return;
             }
         }
