@@ -3,6 +3,7 @@ package org.example.managers;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import org.example.Main;
 import org.example.exeptions.InvalidArgumentsException;
 import org.example.exeptions.NoSuchEnvironmentVariablesException;
 import org.example.exeptions.NotAFileException;
@@ -17,7 +18,9 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class DumpManager {
 
@@ -39,12 +42,8 @@ public class DumpManager {
             System.out.println("Коллекцию считать не удалось!Файл поврежден, отсутствует или пуст!");
             return new HashMap<>();
         }
-        for (Validatable obj : tickets.values()) {
-            if (obj.validate()==false) {
-                System.out.println("Объекты записанной коллекции содержат неправильные значение.");
-                return new HashMap<>();
-            }
-        }
+
+       validateCollection(tickets);
         return tickets;
     }
 
@@ -76,5 +75,24 @@ public class DumpManager {
             wrongEnvironmentVariables = false;
             throw new NotAFileException("Файл не существует!");
         }
+    }
+
+    private static Map<String, Ticket> validateCollection(Map<String, Ticket> ticketMap) {
+        Set<String> objToDelete = new HashSet();
+        int cnt = 0;
+        for (String key : ticketMap.keySet()) {
+            if (ticketMap.get(key).validate() == false) {
+                cnt++;
+                objToDelete.add(key);
+            }
+        }
+        for (String key : objToDelete) {
+            ticketMap.remove(key);
+        }
+        if (cnt==0){
+            return ticketMap;
+        }
+        System.out.println(cnt + " элемент(а) коллекции не прошел(ли) проверку при чтении файла.Они будут удалены.");
+        return ticketMap;
     }
 }
