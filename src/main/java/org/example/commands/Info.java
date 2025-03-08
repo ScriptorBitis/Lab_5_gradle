@@ -12,11 +12,12 @@ public class Info extends Command implements Executable {
 
     @Override
     public void execute(String[] splitedConsoleRead) {
-        System.out.println("Информация о коллекции:\n" +
+        System.out.println("\u001B[32m"+"Информация о коллекции:\n" +
                 "Количество элементов : " + this.engine.getCollectionManager().getCollection().size() + "\n" +
                 "Тип : " +this.engine.getCollectionManager().getCollection().getClass().getSimpleName() + "\n" +
                 "Время инициализации : " + this.engine.getCollectionManager().getInitializationDate() + "\n" +
-                "Набор доступных ключей : " + this.engine.getCollectionManager().getCollection().keySet()
+                "Набор доступных ключей : " + this.engine.getCollectionManager().getCollection().keySet()+
+                "\u001B[0m"
         );
     }
 

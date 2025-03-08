@@ -18,7 +18,7 @@ public class Show extends Command implements Executable {
             return;
         }
         for (String key : this.engine.getCollectionManager().getCollection().keySet()) {
-            System.out.println("Ключ : " + key + ". Элемент : " + this.engine.getCollectionManager().getCollection().get(key));
+            System.out.println("\u001B[34m"+"Ключ : " + key + "\u001B[0m" +"\u001B[32m"+". Элемент : " + this.engine.getCollectionManager().getCollection().get(key)+"\u001B[0m");
         }
     }
 

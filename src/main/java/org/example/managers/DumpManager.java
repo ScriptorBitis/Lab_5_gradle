@@ -28,23 +28,20 @@ public class DumpManager {
     private static Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter()).create();
 
     static public Map<String, Ticket> fillUpCollection() throws NoSuchEnvironmentVariablesException, NotAFileException, InvalidArgumentsException {
-        Type type = new TypeToken<HashMap<String, Ticket>>() {
-        }.getType();
+        Type type = new TypeToken<Map<String, Ticket>>() {}.getType();
         checkEnvironmentVariable("lab_data");
         File file = new File(System.getenv("lab_data"));
         file.setReadable(true);
-        HashMap<String, Ticket> tickets;
         try (FileReader fileReader = new FileReader(file)) {
-            tickets = gson.fromJson(fileReader, type);
+            Map<String, Ticket> tickets = gson.fromJson(fileReader, type);
             System.out.println("Файл прочитан успешно!");
+            validateCollection(tickets);
+            return tickets;
         } catch (Exception e) {
             wrongEnvironmentVariables = false;
             System.out.println("Коллекцию считать не удалось!Файл поврежден, отсутствует или пуст!");
             return new HashMap<>();
         }
-
-       validateCollection(tickets);
-        return tickets;
     }
 
 

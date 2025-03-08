@@ -2,6 +2,7 @@ package org.example.commands;
 
 import org.example.models.Ticket;
 import org.example.utility.Engine;
+
 import java.util.*;
 
 public class PrintAscending extends Command implements Executable {
@@ -10,14 +11,14 @@ public class PrintAscending extends Command implements Executable {
 
     public PrintAscending(int wordsCount, Engine engine) {
         super(wordsCount);
-        this.engine=engine;
+        this.engine = engine;
     }
 
     @Override
     public void execute(String[] splitedConsoleRead) {
         Map<String, Ticket> COLLECTION = this.engine.getCollectionManager().getCollection();
         List<Ticket> ticketByPrice = new ArrayList<>(COLLECTION.values());
-        Collections.sort(ticketByPrice, Comparator.comparing(Ticket::getPrice));
+        Collections.sort(ticketByPrice, (ticket1, ticket2) -> ticket1.getPrice() - ticket2.getPrice());
         for (Ticket ticket : ticketByPrice) {
             System.out.println(ticket.toString());
         }

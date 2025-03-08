@@ -21,7 +21,10 @@ public class Engine {
     private final Scanner consoleRead = new Scanner(System.in);
     private CollectionManager collectionManager;
     private CommandManager commandManager;
-
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_GREEN = "\u001B[32m";
     public void finishProgramm() {
         flag = false;
     }
@@ -63,13 +66,13 @@ public class Engine {
             try {
                 commandManager.setUserRequest(consoleRead.nextLine().trim().split(" "));
             } catch (NoSuchElementException e) {
-                System.out.println("Ярослав Вадимович, не надо никаких ctrl+d, пожалуйста\nЯ закрою прогу, ибо не надо всякую фигню забивать в консоль");
+                System.out.println(ANSI_RED+"Ярослав Вадимович, не надо никаких ctrl+d, пожалуйста\nЯ закрою прогу, ибо не надо всякую фигню забивать в консоль"+ANSI_RESET);
                 return;
             } catch (InterraptЕxitException e) {
                 this.finishProgramm();
-                System.out.println(e.getMessage());
+                System.out.println(ANSI_RED+e.getMessage()+ANSI_RESET);
             } catch (Exception e) {
-                System.out.println(e);
+                System.out.println(ANSI_RED+e+ANSI_RESET);
             }
         }
     }
