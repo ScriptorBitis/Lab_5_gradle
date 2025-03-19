@@ -3,18 +3,13 @@ package org.example.managers;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import org.example.Main;
 import org.example.exeptions.InvalidArgumentsException;
 import org.example.exeptions.NoSuchEnvironmentVariablesException;
 import org.example.exeptions.NotAFileException;
 import org.example.models.Ticket;
 import org.example.utility.LocalDateTimeAdapter;
-import org.example.utility.Validatable;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -28,11 +23,12 @@ public class DumpManager {
     private static Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter()).create();
 
     static public Map<String, Ticket> fillUpCollection() throws NoSuchEnvironmentVariablesException, NotAFileException, InvalidArgumentsException {
-        Type type = new TypeToken<Map<String, Ticket>>() {}.getType();
+        Type type = new TypeToken<Map<String, Ticket>>() {
+        }.getType();
         checkEnvironmentVariable("lab_data");
         File file = new File(System.getenv("lab_data"));
         file.setReadable(true);
-        try (FileReader fileReader = new FileReader(file)) {
+        try (Reader fileReader = new FileReader(file)) {
             Map<String, Ticket> tickets = gson.fromJson(fileReader, type);
             System.out.println("Файл прочитан успешно!");
             validateCollection(tickets);
@@ -56,9 +52,10 @@ public class DumpManager {
             file = new File("lab_data.json");
         }
         file.setWritable(true);
-        try (FileWriter fileWriter = new FileWriter(file)) {
+        try (Writer fileWriter = new FileWriter(file)) {
             fileWriter.write(json);
         }
+        file.setWritable(false);
     }
 
 
@@ -86,7 +83,7 @@ public class DumpManager {
         for (String key : objToDelete) {
             ticketMap.remove(key);
         }
-        if (cnt==0){
+        if (cnt == 0) {
             return ticketMap;
         }
         System.out.println(cnt + " элемент(а) коллекции не прошел(ли) проверку при чтении файла.Они будут удалены.");

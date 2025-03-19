@@ -1,6 +1,6 @@
 package org.example.utility.console;
 
-import org.example.exeptions.InterraptЕxitException;
+import org.example.exeptions.InterraptExitException;
 
 import java.util.Scanner;
 
@@ -88,7 +88,7 @@ public class StandartConsole implements Console {
     private String getUserInputCheckExit() {
         String input = scanner.nextLine().trim();
         if (input.equals("exit")) {
-            throw new InterraptЕxitException("Выход из приложения");
+            throw new InterraptExitException("Выход из приложения");
         }
         return input;
 

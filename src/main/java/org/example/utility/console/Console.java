@@ -1,9 +1,9 @@
 package org.example.utility.console;
 
-import org.example.exeptions.InterraptЕxitException;
+import org.example.exeptions.InterraptExitException;
 
 public interface Console {
-    String getUserInputString(String message) throws InterraptЕxitException;
+    String getUserInputString(String message) throws InterraptExitException;
 
     int getUserInputInt(String message);
 

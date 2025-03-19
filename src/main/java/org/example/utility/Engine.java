@@ -2,7 +2,7 @@ package org.example.utility;
 
 
 import org.example.commands.*;
-import org.example.exeptions.InterraptЕxitException;
+import org.example.exeptions.InterraptExitException;
 import org.example.managers.CollectionManager;
 import org.example.managers.CommandManager;
 import org.example.models.IdGenerator;
@@ -68,7 +68,7 @@ public class Engine {
             } catch (NoSuchElementException e) {
                 System.out.println(ANSI_RED+"Ярослав Вадимович, не надо никаких ctrl+d, пожалуйста\nЯ закрою прогу, ибо не надо всякую фигню забивать в консоль"+ANSI_RESET);
                 return;
-            } catch (InterraptЕxitException e) {
+            } catch (InterraptExitException e) {
                 this.finishProgramm();
                 System.out.println(ANSI_RED+e.getMessage()+ANSI_RESET);
             } catch (Exception e) {
