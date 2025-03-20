@@ -7,10 +7,16 @@ import org.example.utility.console.StandartConsole;
 
 import java.util.Scanner;
 
+/**
+ * Класс для создания {@link Coordinates} вводом значений в консоль
+ */
 public class CoordinatesCreator {
     private static final Console console = new StandartConsole(new Scanner(System.in));
 
-    public static Coordinates createCoordinates() throws WrongFieldValueException {
+    /**
+     * @return объект класса {@link Coordinates}
+     */
+    public static Coordinates createCoordinates() {
         Coordinates.Builder builder = new Coordinates.Builder();
         System.out.println("Инициализировано задание координат");
         builder.x(askX());

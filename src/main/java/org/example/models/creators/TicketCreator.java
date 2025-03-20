@@ -10,11 +10,17 @@ import org.example.utility.console.StandartConsole;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-
+/**
+ * Класс для создания {@link Ticket} вводом значений в консоль
+ */
 public class TicketCreator {
     private static final Console console = new StandartConsole(new Scanner(System.in));
 
-    public static Ticket createTicket(String message) throws WrongFieldValueException {
+    /**
+     * @param message сообщение для пользователя
+     * @return объект класса {@link Ticket}
+     */
+    public static Ticket createTicket(String message) {
 
         System.out.println(message);
         Ticket.Builder builder = new Ticket.Builder();
@@ -29,6 +35,10 @@ public class TicketCreator {
         return element;
     }
 
+    /**
+     *Запрашивает у пользователя имя
+     * @return
+     */
     private static String askName() {
         String name = null;
         while (name == null || name.isBlank()) {
@@ -37,6 +47,10 @@ public class TicketCreator {
         return name;
     }
 
+    /**
+     *Запрашивает у пользователя цену бьилета
+     * @return
+     */
     private static Integer askPrice() {
         Integer price = 0;
         boolean correctField = true;
@@ -57,6 +71,10 @@ public class TicketCreator {
         return price;
     }
 
+    /**
+     *Запрашивает у пользователя текущую скидку на билет
+     * @return
+     */
     private static float askDiscount() {
         float discount = 0;
         boolean correctField = true;
@@ -74,6 +92,10 @@ public class TicketCreator {
         return discount;
     }
 
+    /**
+     *Запрашивает у пользователя состояние поля
+     * @return
+     */
     private static Boolean askRefundable() {
         Boolean refundable = null;
         Map<String, Boolean> refundableMap = new HashMap<>();
@@ -90,6 +112,10 @@ public class TicketCreator {
         return refundable;
     }
 
+    /**
+     * Запросит у пользователя ввести ENUM - значение
+     * @return
+     */
     private static TicketType askTicketType() {
         TicketType ticketType = null;
         Map<String, TicketType> ticketsTypes = new HashMap<>();

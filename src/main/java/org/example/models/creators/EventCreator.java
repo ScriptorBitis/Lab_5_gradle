@@ -6,12 +6,18 @@ import org.example.utility.console.Console;
 import org.example.utility.console.StandartConsole;
 
 import java.util.Scanner;
-
+/**
+ * Класс для создания {@link Event} вводом значений в консоль
+ */
 public class EventCreator {
 
     private static final Console console = new StandartConsole(new Scanner(System.in));
 
-    public static Event createEvent() throws WrongFieldValueException {
+    /**
+     *
+     * @return объект класса {@link Event}
+     */
+    public static Event createEvent() {
         Event event = null;
         Event.Builder builder = new Event.Builder();
         System.out.println("Инициализировано создание ивента");

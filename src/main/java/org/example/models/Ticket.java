@@ -68,6 +68,9 @@ public class Ticket implements Validatable {
         return "Ticket{" + "id=" + id + ", name='" + name + '\'' + ", creationDate=" + creationDate + ", price=" + price + ", discount=" + discount + ", refundable=" + refundable + ", coordinates=" + coordinates + ", type=" + type + ", event=" + event + '}';
     }
 
+    /**
+     * Реализованный шаблон 'билдер'
+     */
     public static class Builder {
         private String name = null;
         private Integer price = null;

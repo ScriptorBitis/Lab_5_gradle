@@ -1,13 +1,11 @@
 package org.example.utility;
 
-
 import org.example.commands.*;
 import org.example.exeptions.InterraptExitException;
 import org.example.managers.CollectionManager;
 import org.example.managers.CommandManager;
 import org.example.models.IdGenerator;
 import org.example.models.Ticket;
-
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +14,12 @@ import java.util.Scanner;
 
 import static org.example.managers.DumpManager.fillUpCollection;
 
+/** Движок (ядро)
+ * Класс, объединяющий в себе CommandManager и CollectionManager
+ * @see CommandManager
+ * @see CollectionManager
+ */
+
 public class Engine {
     private boolean flag = true;
     private final Scanner consoleRead = new Scanner(System.in);
@@ -23,12 +27,18 @@ public class Engine {
     private CommandManager commandManager;
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_BLUE = "\u001B[34m";
-    public static final String ANSI_GREEN = "\u001B[32m";
+
+    /**
+     * Делает переменную, необходимую для чтения команд из консоли, равной false
+     */
     public void finishProgramm() {
         flag = false;
     }
 
+    /**
+     * Создает {@link CollectionManager} и {@link CommandManager}, заполняет CommandManager командами.
+     * Заполняет коллекцию и начинает принимать ввод из консоли, пока {@link Engine#flag} = true
+     */
     public void runProgramm() {
 
         this.collectionManager = new CollectionManager(new HashMap<>());
@@ -77,11 +87,18 @@ public class Engine {
         }
     }
 
-
+    /**
+     * Возвращает {@link CollectionManager}, назначенный объекту
+     * @return {@link Engine#collectionManager}
+     */
     public CollectionManager getCollectionManager() {
         return collectionManager;
     }
 
+    /**
+     * Возвращает {@link CommandManager}, назначенный объекту
+     * @return {@link Engine#commandManager}
+     */
     public CommandManager getCommandManager() {
         return commandManager;
     }
