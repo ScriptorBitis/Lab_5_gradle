@@ -4,6 +4,9 @@ import org.example.utility.Validatable;
 
 import java.time.LocalDateTime;
 
+/**
+ * Класс для создания билетов
+ */
 public class Ticket implements Validatable {
     private final int id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private final java.time.LocalDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
@@ -15,19 +18,35 @@ public class Ticket implements Validatable {
     private TicketType type; //Поле может быть null
     private Event event; //Поле может быть null
 
+    /**
+     * конструктор. При создании выдается id и дата создания
+     * @see IdGenerator
+     */
     public Ticket() {
         this.creationDate = LocalDateTime.now().withNano(0);
         this.id = IdGenerator.assigntTicketId();
     }
 
+    /**
+     * Получить id текущего билета
+     * @return id
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Получить {@link Event} текущего билета
+     * @return  объект {@link Event}
+     */
     public Event getEvent() {
         return event;
     }
 
+    /**
+     * Возвращает {@link Ticket#price}, если значение Integer null, то возвращается Integer.MIN_VALUE
+     * @return {@link Ticket#price}
+     */
     public Integer getPrice() {
         if (this.price == null) {
             return Integer.MIN_VALUE;
@@ -35,14 +54,26 @@ public class Ticket implements Validatable {
         return price;
     }
 
+    /**
+     * Возвращает {@link Ticket#coordinates}
+     * @return {@link Coordinates}
+     */
     public Coordinates getCoordinates() {
         return coordinates;
     }
 
+    /**
+     * Возвращает значение из {@link TicketType}
+     * @return
+     */
     public TicketType getType() {
         return type;
     }
 
+    /**
+     * Валидация объекта
+     * @return значение true/false
+     */
     @Override
     public boolean validate() {
         if (id <= 0
@@ -80,43 +111,73 @@ public class Ticket implements Validatable {
         private TicketType type = null;
         private Event event = new Event();
 
-
+        /**
+         * @param name имя
+         * @return объект класса {@link Builder} с поставленным значением
+         */
         public Builder name(String name) {
             this.name = name;
             return this;
         }
 
-
+        /**
+         * @param price цена билета
+         * @return объект класса {@link Builder} с поставленным значением
+         */
         public Builder price(Integer price) {
             this.price = price;
             return this;
         }
 
+        /**
+         * @param discount скидка билета
+         * @return объект класса {@link Builder} с поставленным значением
+         */
         public Builder discount(float discount) {
             this.discount = discount;
             return this;
         }
 
+        /**
+         * @param refundable можно ли вернуть билет (true/false)
+         * @return объект класса {@link Builder} с поставленным значением
+         */
         public Builder refundable(Boolean refundable) {
             this.refundable = refundable;
             return this;
         }
 
+        /**
+         * @param coordinates координаты билета
+         * @return объект класса {@link Builder} с поставленным значением
+         */
         public Builder coordinates(Coordinates coordinates) {
             this.coordinates = coordinates;
             return this;
         }
 
+        /**
+         * @param type тип билета
+         * @return объект класса {@link Builder} с поставленным значением
+         */
         public Builder type(TicketType type) {
             this.type = type;
             return this;
         }
 
+
+        /**
+         * @param event событие билета
+         * @return объект класса {@link Builder} с поставленным значением
+         */
         public Builder event(Event event) {
             this.event = event;
             return this;
         }
 
+        /**
+         * @return объект класса {@link Ticket}
+         */
         public Ticket build() {
             Ticket ticket = new Ticket();
             ticket.name = this.name;

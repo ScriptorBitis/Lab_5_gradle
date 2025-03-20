@@ -3,7 +3,6 @@ package org.example.managers;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import org.example.exeptions.InvalidArgumentsException;
 import org.example.exeptions.NoSuchEnvironmentVariablesException;
 import org.example.exeptions.NotAFileException;
 import org.example.models.Ticket;
