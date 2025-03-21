@@ -9,7 +9,9 @@ repositories {
 dependencies {
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
-    implementation("com.google.code.gson:gson:2.10")
+    // https://mvnrepository.com/artifact/com.google.code.gson/gson
+    implementation("com.google.code.gson:gson:2.12.1")
+
 }
 
 val fatJar = task("fatJar", type = Jar::class) {
