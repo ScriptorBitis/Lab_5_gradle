@@ -9,15 +9,29 @@ import org.example.utility.Engine;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Класс - команда для удаления элементов коллекцию по типу {@link TicketType}
+ */
 public class RemoveAnyByType extends Command implements Executable {
-
+    /**
+     * Доступ к двигателю, к которому привязана команда ( доступ к {@link org.example.managers.CollectionManager} и {@link org.example.managers.CommandManager}
+     */
     private Engine engine;
 
+    /**
+     * Стандартный конструктор
+     * @param wordsCount количество слов
+     * @param engine ссылка на {@link Engine}
+     */
     public RemoveAnyByType(int wordsCount, Engine engine) {
         super(wordsCount);
         this.engine=engine;
     }
 
+    /**
+     *
+     * @param splitedConsoleRead ввод необходимых аргументов с консоли
+     */
     @Override
     public void execute(String[] splitedConsoleRead) {
         validateCommand(splitedConsoleRead);
@@ -41,6 +55,11 @@ public class RemoveAnyByType extends Command implements Executable {
         }
     }
 
+    /**
+     * Валидация аргументов
+     * @param splitedConsoleRead -ввод с консоли
+     * @throws InvalidArgumentsException
+     */
     @Override
     public void validateCommand(String[] splitedConsoleRead) throws InvalidArgumentsException {
         if (splitedConsoleRead.length != this.getWordsCount()) {
@@ -48,11 +67,18 @@ public class RemoveAnyByType extends Command implements Executable {
         }
     }
 
+    /**
+     * Переопределенный метод для работы {@link org.example.managers.CommandManager#setUpCommand(Executable)}
+     * @return имя команды, которое надо ввести с консоли
+     */
     @Override
     public String toString() {
         return "remove_any_by_type";
     }
 
+    /**
+     * Описать, что делает команда
+     */
     @Override
     public void describe() {
         System.out.println("remove_any_by_type type : удалить из коллекции один элемент, значение поля type которого эквивалентно заданному");

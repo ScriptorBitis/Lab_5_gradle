@@ -7,15 +7,29 @@ import org.example.utility.Engine;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Класс - команда. Удаляет объекты, меньше заданного
+ */
 public class RemoveLower extends Command implements Executable {
-
+    /**
+     * Доступ к двигателю, к которому привязана команда ( доступ к {@link org.example.managers.CollectionManager} и {@link org.example.managers.CommandManager}
+     */
     private Engine engine;
 
+    /**
+     * Стандартный конструктор
+     * @param wordsCount количество слов
+     * @param engine ссылка на {@link Engine}
+     */
     public RemoveLower(int wordsCount, Engine engine) {
         super(wordsCount);
         this.engine=engine;
     }
 
+    /**
+     *
+     * @param splitedConsoleRead ввод необходимых аргументов с консоли
+     */
     @Override
     public void execute(String[] splitedConsoleRead) {
         Ticket ticket = TicketCreator.createTicket("Инициализировано создание билета для поиска и удаления билетов, цена которых меньше");
@@ -32,11 +46,18 @@ public class RemoveLower extends Command implements Executable {
         }
     }
 
+    /**
+     * Переопределенный метод для работы {@link org.example.managers.CommandManager#setUpCommand(Executable)}
+     * @return имя команды, которое надо ввести с консоли
+     */
     @Override
     public String toString() {
         return "remove_lower";
     }
 
+    /**
+     * Описать, что делает команда
+     */
     @Override
     public void describe() {
         System.out.println("remove_lower {element} : удалить из коллекции все элементы, меньшие, чем заданный");
