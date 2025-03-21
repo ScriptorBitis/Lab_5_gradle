@@ -3,7 +3,6 @@ package org.example.managers;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import org.example.exeptions.InvalidArgumentsException;
 import org.example.exeptions.NoSuchEnvironmentVariablesException;
 import org.example.exeptions.NotAFileException;
 import org.example.models.Ticket;
@@ -17,12 +16,21 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Класс для записи/ чтения коллекции из консоли
+ */
 public class DumpManager {
 
     private static boolean wrongEnvironmentVariables = true;
     private static Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter()).create();
 
-    static public Map<String, Ticket> fillUpCollection() throws NoSuchEnvironmentVariablesException, NotAFileException, InvalidArgumentsException {
+    /**
+     *
+     * @return десереализованную коллекцию
+     * @throws NoSuchEnvironmentVariablesException - переменной окружения, которая ведет к файлу, не существует
+     * @throws NotAFileException - если переменная окружения ведет к директории/в пустое место
+     */
+    static public Map<String, Ticket> fillUpCollection() throws NoSuchEnvironmentVariablesException, NotAFileException {
         Type type = new TypeToken<Map<String, Ticket>>() {
         }.getType();
         checkEnvironmentVariable("lab_data");
@@ -40,7 +48,11 @@ public class DumpManager {
         }
     }
 
-
+    /**
+     * метод, сереализующий Map в формат json
+     * @param collectionManager - коллекция, которую необходимо записать в файл
+     * @throws IOException
+     */
     static public void writeCollection(CollectionManager collectionManager) throws IOException {
         String json = gson.toJson(collectionManager.getCollection());
         File file;
@@ -58,7 +70,12 @@ public class DumpManager {
         file.setWritable(false);
     }
 
-
+    /**
+     * метод, проверяющий корректность переменной окружения
+     * @param environmentVariable - переменная окружения
+     * @throws NoSuchEnvironmentVariablesException - переменной окружения, которая ведет к файлу, не существует
+     * @throws NotAFileException - если переменная окружения ведет к директории/в пустое место
+     */
     private static void checkEnvironmentVariable(String environmentVariable) throws NoSuchEnvironmentVariablesException, NotAFileException {
         if (System.getenv(environmentVariable) == null) {
             wrongEnvironmentVariables = false;
@@ -71,6 +88,11 @@ public class DumpManager {
         }
     }
 
+    /**
+     * Валидация каждого прочитанного элемента
+     * @param ticketMap - прочитанная Map`а
+     * @return коллекция, в которой удалили билеты, которые не прошли валидацию
+     */
     private static Map<String, Ticket> validateCollection(Map<String, Ticket> ticketMap) {
         Set<String> objToDelete = new HashSet();
         int cnt = 0;

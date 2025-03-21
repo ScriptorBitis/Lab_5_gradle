@@ -1,6 +1,5 @@
 plugins {
-    id("com.github.johnrengelman.shadow") version "8.1.1"
-    java
+    id("java")
 }
 
 repositories {
@@ -13,13 +12,26 @@ dependencies {
     implementation("com.google.code.gson:gson:2.10")
 }
 
-tasks.shadowJar {
+val fatJar = task("fatJar", type = Jar::class) {
     manifest {
+        attributes["Implementation-Title"] = "Gradle Jar File Example"
+        attributes["Implementation-Version"] = version
         attributes["Main-Class"] = "org.example.Main"
     }
-    archiveClassifier.set("all")
+    from(configurations.runtimeClasspath.get().map({ if (it.isDirectory) it else zipTree(it) }))
+    with(tasks.jar.get() as CopySpec)
 }
 
-tasks.build {
-    dependsOn(tasks.shadowJar)
+tasks.jar {
+    archiveFileName.set("lab5.jar")
+    manifest {
+        attributes("Main-Class" to "org.example.Main")
+        dependsOn(fatJar)
+    }
+}
+
+tasks.javadoc {
+    classpath += sourceSets.main.get().compileClasspath
+
+    options.encoding = "UTF-8"
 }

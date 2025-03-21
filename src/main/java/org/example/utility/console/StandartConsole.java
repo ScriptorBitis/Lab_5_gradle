@@ -1,9 +1,11 @@
 package org.example.utility.console;
 
 import org.example.exeptions.InterraptExitException;
-
 import java.util.Scanner;
 
+/**
+ * Класс, необходимый для ввода определенных значений
+ */
 public class StandartConsole implements Console {
     private final Scanner scanner;
 
@@ -11,12 +13,22 @@ public class StandartConsole implements Console {
         this.scanner = scanner;
     }
 
+    /**
+     *
+     * @param message сообщение, которое будет передано пользователю
+     * @return String, который проверяется на ввод команды 'exit'
+     */
     @Override
     public String getUserInputString(String message) {
         System.out.print(message);
         return getUserInputCheckExit();
     }
 
+    /**
+     * Пользователь будет вводить int, пока число не будет введено
+     * @param message сообщение, которое будет передано пользователю
+     * @return int
+     */
     @Override
     public int getUserInputInt(String message) {
         int integer = 0;
@@ -33,6 +45,11 @@ public class StandartConsole implements Console {
         return integer;
     }
 
+    /**
+     *
+     * @param message сообщение, которое будет передано пользователю
+     * @return Integer, где ввод пустой строки считается за null
+     */
     @Override
     public Integer getUserInputIntMayBeNull(String message) {
         Integer integer = null;
@@ -53,6 +70,11 @@ public class StandartConsole implements Console {
         return integer;
     }
 
+    /**
+     *
+     * @param message сообщение, которое будет передано пользователю
+     * @return double
+     */
     @Override
     public double getUserInputDouble(String message) {
         double integer = 0;
@@ -69,6 +91,11 @@ public class StandartConsole implements Console {
         return integer;
     }
 
+    /**
+     *
+     * @param message сообщение, которое будет передано пользователю
+     * @return float
+     */
     @Override
     public float getUserInputFloat(String message) {
         float integer = 0;
@@ -85,6 +112,10 @@ public class StandartConsole implements Console {
         return integer;
     }
 
+    /**
+     * Проверяет сообщение на введенную команду 'exit'
+     * @return
+     */
     private String getUserInputCheckExit() {
         String input = scanner.nextLine().trim();
         if (input.equals("exit")) {
